@@ -118,8 +118,26 @@ while True:
         while True: #Jogar enquanto os jogadores o entenderem   
             galo = inicializaTabuleiro(galo, 3, 3,'_') #Limpar o tabuleiro de jogo
             #mostraTabuleiro(galo, 3, 3);
-            
 
+"""
+def verificaEmpate(tabuleiro):
+    for linha in tabuleiro:
+        if '_' in linha:
+            return False  # Ainda há jogadas disponíveis
+    return True  # Tabuleiro cheio, é empate
+empate=0
+#contar vitorias
+            simbolo = jogo(galo, simbolo, simboloJ1, simboloJ2);
+            # simbolo contem o simbolo do vencedor
+            if simbolo == simboloJ1 and verificaempate!=True:
+                Jogador1[2]+=1
+            if simbolo == simboloJ1 and verificaempate!=True:
+                Jogador2[2]+=1
+            if verificaempate!=True:    
+            empate+=1
+            
+"""            
+            
             #contar vitorias
             simbolo = jogo(galo, simbolo, simboloJ1, simboloJ2);
             # simbolo contem o simbolo do vencedor
@@ -127,7 +145,7 @@ while True:
                 Jogador1[2]+=1
             if simbolo == simboloJ1:
                 Jogador2[2]+=1
-
+            
 
             mostraTabuleiro(galo,3,3)
             continuar= input("Deseja jogar novamente (S/N)").upper
