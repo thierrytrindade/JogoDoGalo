@@ -1,4 +1,4 @@
-﻿#Trabalho 2 AI - Instruções da professora
+﻿##Trabalho 2 AI - Instruções da professora
 
 Falta : Ver empate
 mostra resumo do jogo se existir
