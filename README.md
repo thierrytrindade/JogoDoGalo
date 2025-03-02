@@ -1,9 +1,12 @@
-﻿## Trabalho 2 AI - Instruções da professora
+﻿# FICHEIRO README.md
+## Trabalho 2 AI - Instruções da professora
 
 ### EM FALTA !
 #### Falta : Ver empate
 #### Mostra resumo do jogo se existir
 #### Predefeni o X como primeiro e não pos a parte do computador
+#### Só ser possivel 9 jogadas por jogo
+# DEPOIS NO FIM FAZE A FILTRAGEM ANTI AI!
 
 ________________
 
@@ -25,7 +28,8 @@ ________________
 3. fazer batalhas: melhor de 3; melhor de 5; personalizar o número de jogos da batalha; resumo estatístico dos jogos efetuados na batalha.
 4. jogar contra o computador;
 5. interromper o jogo em qualquer jogada, através da introdução de um caracter à escolha dos jogadores, dando a vitória ao outro jogador.
-O programa deverá ser construído recorrendo a estruturas de dados simples e a arrays unidimensionais ou bidimensionais e à modularização e otimização do código.
+
+##### O programa deverá ser construído recorrendo a estruturas de dados simples e a arrays unidimensionais ou bidimensionais e à modularização e otimização do código.
 Critérios de avaliação:
 ________________
 
