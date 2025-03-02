@@ -1,3 +1,10 @@
+############# ERROS
+# meter um numero diferente de 1-3 e andar para a frente sem aparecer erro por exemplo meti 23 em vez de 2 e depois 3 na alinea a seguir e avançou
+# ADICIONAR A FUNCAO DE NAO DEFINIR O NOME DO JOGADOR
+# O JOGO SO DEVE PERMITIR 9 JOGADAS.
+
+
+
 #Jogo do Galo
 #Rotinas
 """
