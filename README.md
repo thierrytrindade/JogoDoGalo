@@ -6,6 +6,9 @@
 #### Mostra resumo do jogo se existir
 #### Predefeni o X como primeiro e não pos a parte do computador
 #### Só ser possivel 9 jogadas por jogo
+#### NAO PERMITIR COLOCAR DADOS QUE NAO SAO PEDIDOS, por exemplo quando peço a linha de 1 a 3 nao poder colocar qualquer coisa excepto 1,2,3 e as respetivas palavras chaves mencionadas para funcoes especiais como desistir que é pedido na alinha 10 por exemplo
+#### O X está predefinido como o simbolo para o jogador 1 deseja muda-lo S/N permitindo assim simplificar o codigo para s ou n
+#### no menu deve ter uma parte para personalizar por exmeplo as cores que ainda nao fiz 
 # DEPOIS NO FIM FAZE A FILTRAGEM ANTI AI!
 
 ________________

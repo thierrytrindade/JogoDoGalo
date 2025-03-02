@@ -20,42 +20,52 @@ atualizar a pontuação do jogo
 questionar se querem voltar a jogar (novo jogo)
 """
 
-
 def criaTabuleiro(linha, coluna, valor):
-    tabuleiro = [] # tabuleiro é igual a matriz
+    matriz = []
     for i in range(linha):
         linhai = []
         for j in range(coluna):
             linhai += [valor]
-        tabuleiro += [linhai]
-    return tabuleiro
+        matriz += [linhai]
+    return matriz
 
-def inicializaTabuleiro(tabuleiro, linha, coluna, valor):
+def inicializaTabuleiro(matriz, linha, coluna, valor):
     for i in range(linha):
         for j in range(coluna):
-            tabuleiro[i][j] = valor
-    return tabuleiro
+            matriz[i][j] = valor
+    return matriz
 
-def mostraTabuleiro(tabuleiro, linha, coluna):
+def mostraTabuleiro(matriz, linha, coluna):
+    # Atualizada para mostrar o tabuleiro com linhas e colunas delimitadas
     for i in range(linha):
+        linha_str = ""
         for j in range(coluna):
-            print(tabuleiro[i][j], end=' ')
-        print()
+            # Se o espaço estiver vazio (representado por '_') mostra espaço em branco
+            celula = ' ' if matriz[i][j] == '_' else matriz[i][j]
+            if j < coluna - 1:
+                linha_str += " " + celula + " |"
+            else:
+                linha_str += " " + celula + " "
+        print(linha_str)
+        if i < linha - 1:
+            print("---+---+---")
 
 def menuJogo():
     print(".... JOGO DO GALO ....")
     print("1 - Jogar")
     print("2 - Sair")
-    opcao = int(input("Escolha uma opção: "))
-    return opcao
+    op = int(input("Escolha uma opção: "))
+    return op
 
 def verificaVencedor(tabuleiro, simbolo):
     # Verifica linhas e colunas
     for i in range(3):
-        if (tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2] == simbolo) or (tabuleiro[0][i] == tabuleiro[1][i] == tabuleiro[2][i] == simbolo):
+        if (tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2] == simbolo) or \
+           (tabuleiro[0][i] == tabuleiro[1][i] == tabuleiro[2][i] == simbolo):
             return True
     # Verifica diagonais
-    if (tabuleiro[0][0] == tabuleiro[1][1] == tabuleiro[2][2] == simbolo) or (tabuleiro[0][2] == tabuleiro[1][1] == tabuleiro[2][0] == simbolo):
+    if (tabuleiro[0][0] == tabuleiro[1][1] == tabuleiro[2][2] == simbolo) or \
+       (tabuleiro[0][2] == tabuleiro[1][1] == tabuleiro[2][0] == simbolo):
         return True
     return False
 
@@ -73,32 +83,25 @@ def jogo(galo, sJ1, sJ2):
             simbolo = sJ1
         else:
             simbolo = sJ2
-
         # Validação da jogada
-        print("\nJogador", simbolo)
-        while True:        
-            while True :
+        while True:
+            print("\nJogador", simbolo)
+            try:
                 linha = int(input("Linha 1..3: "))
-                # Verifica se as coordenadas estão dentro do intervalo permitido
-                if linha not in(1,2,3): 
-                    print("Coordenadas inválidas! Por favor insira valores entre 1 a 3.")
-                    continue
-                else:
-                    break
-            while True :
                 coluna = int(input("Coluna 1..3: "))
-                # Verifica se as coordenadas estão dentro do intervalo permitido
-                if coluna not in (1,2,3):
-                    print("Coordenadas inválidas! Por favor insira valores entre 1 a 3.")
-                    continue
-                else:
-                    break 
+            except ValueError:
+                print("Por favor, insira números válidos.")
+                continue
+            # Verifica se as coordenadas estão dentro do intervalo permitido
+            if linha < 1 or linha > 3 or coluna < 1 or coluna > 3:
+                print("Coordenadas inválidas! Por favor insira valores entre 1 e 3.")
+                continue
+            # Verifica se a posição está livre
             if galo[linha-1][coluna-1] == '_':
                 galo[linha-1][coluna-1] = simbolo
-                break     
+                break
             else:
-                print("\n------ Posição ocupada, escolha outra!!!\n")   
-        
+                print("\n------ Posição ocupada, escolha outra!!!\n")
         # Verifica se houve vencedor
         if verificaVencedor(galo, simbolo):
             mostraTabuleiro(galo, 3, 3)
@@ -108,54 +111,46 @@ def jogo(galo, sJ1, sJ2):
             mostraTabuleiro(galo, 3, 3)
             print(" -- Empate!")
             return "empate"
-    return None #returna nada para prevenir erros(é uma proteção do código)
+    return None
 
 # Programa principal
 galo = criaTabuleiro(3, 3, 0)
-galo = inicializaTabuleiro(galo, 3, 3, ' ')
+galo = inicializaTabuleiro(galo, 3, 3, '_')
 
-""" # Definir os símbolos dos jogadores
+# Definir os símbolos dos jogadores
 simboloJ1 = 'X'
-simboloJ2 = 'O' """
-
-jogador1 = ["", "X", "", 0]
-jogador2 = ["", "O", "", 0]
-
-
-
-
+simboloJ2 = 'O'
 
 # Dados dos jogadores: [nome, símbolo, vitórias]
-jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
-escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-# escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
+Jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
+escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
 if escolha == 1:
-    jogador2 = [input("Nome do segundo jogador: "), "O" if jogador1[1] == "X" else "X", 0]
+    Jogador2 = [input("Nome do segundo jogador: "), "O" if Jogador1[1] == "X" else "X", 0]
 else:
     # Define o símbolo automaticamente para o computador
-    jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
+    Jogador2 = ["Computador", "O" if Jogador1[1] == "X" else "X", 0]
 
-simboloJ1 = jogador1[1]
-simboloJ2 = jogador2[1]
+simboloJ1 = Jogador1[1]
+simboloJ2 = Jogador2[1]
 
 empates = 0
 
 while True:
-    opcao = menuJogo()
-    if opcao == 1:
-        while True: #Jogar enquanto os jogadores o entenderem  
+    op = menuJogo()
+    if op == 1:
+        while True:
             galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
 
             # Realiza uma partida
             resultado = jogo(galo, simboloJ1, simboloJ2)
             # Atualiza estatísticas
             if resultado == simboloJ1:
-                jogador1[2] += 1
+                Jogador1[2] += 1
             elif resultado == simboloJ2:
-                jogador2[2] += 1
+                Jogador2[2] += 1
             elif resultado == "empate":
                 empates += 1
-            # Pergunta se deseja continuar jogando
+
             continuar = input("Deseja jogar novamente (S/N): ").upper()
             if continuar == "N":
                 break
@@ -163,11 +158,11 @@ while True:
             # Opcional: alterna os símbolos para a próxima partida
             simboloJ1, simboloJ2 = simboloJ2, simboloJ1
 
-    elif opcao == 2:
+    elif op == 2:
         print("A sair do jogo....")
         print("\n--- Resumo do Jogo ---")
-        print("Jogador 1 (", jogador1[0], "): ", jogador1[2], " vitória(s)", sep="")
-        print("Jogador 2 (", jogador2[0], "): ", jogador2[2], " vitória(s)", sep="")
+        print("Jogador 1 (", Jogador1[0], "): ", Jogador1[2], " vitória(s)", sep="")
+        print("Jogador 2 (", Jogador2[0], "): ", Jogador2[2], " vitória(s)", sep="")
         print("Empates:", empates)
         break
     else:
