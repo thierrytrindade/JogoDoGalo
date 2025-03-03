@@ -130,6 +130,8 @@ def jogo(galo, sJ1, sJ2):
             else:
                 print("\n------ Posição ocupada, escolha outra!!!\n") 
                 mostraTabuleiro(galo, 3, 3)
+                print("\nJogador", simbolo)#repito a chamada do jugador, pois como faço 130 linhas para continuar a saber qual o jogador a jogar
+                
         # Verifica se houve vencedor
         if verificaVencedor(galo, simbolo):
             mostraTabuleiro(galo, 3, 3)
