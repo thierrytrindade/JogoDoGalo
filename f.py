@@ -124,7 +124,23 @@ while True:
     jogador2 = ["", "O", "", 0]
 
     # Dados dos jogadores: [nome, símbolo, vitórias]
-    jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
+    jogador1 = [
+    input("Nome do primeiro jogador: "),
+    input("Qual símbolo que quer utilizar (X ou O): ").upper(),
+    0,
+    input("Enumere a cor que deseja utilizar para os seus símbolos:\n"
+          "1  - PRETO\n"
+          "2  - VERMELHO\n"
+          "3  - VERDE\n"
+          "4  - CASTANHO\n"
+          "5  - AZUL\n"
+          "6  - ROXO\n"
+          "7  - CIANO\n"
+          "8  - CINZENTO\n"
+          "9 - AMARELO\n"
+          "10 - BRANCO\n"
+          "Digite o número correspondente à sua escolha: ")
+]
     escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
     # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
     if escolha == 1:
