@@ -1,5 +1,7 @@
+""" 
 Enumere a cor que deseja utilizar para os seus simbolos
 
+0	 -	PREDEFENIDO
 1	 - 	AMARELO = "\033[1;33m"
 2	 - 	AZUL = "\033[1;34m"
 3	 - 	BRANCO = "\033[1;37m"
@@ -10,7 +12,20 @@ Enumere a cor que deseja utilizar para os seus simbolos
 8	 - 	ROXO = "\033[1;35m"
 9	 - 	VERDE = "\033[1;32m"
 10	 - 	VERMELHO = "\033[1;31m"
-
+END = "\033[0m"  #Anula a formatação anterior
+ """
+PREDEFENIDO = 0
+AMARELO = "\033[1;33m"
+AZUL = "\033[1;34m"
+BRANCO = "\033[1;37m"
+CASTANHO = "\033[0;33m"
+CIANO = "\033[0;36m"
+CINZENTO = "\033[1;30m"
+PRETO = "\033[0;30m"
+ROXO = "\033[1;35m"
+VERDE = "\033[1;32m"
+VERMELHO = "\033[1;31m"
+END = "\033[0m"  #Anula a formatação anterior
 
 ############# ERROS
 # meter um numero diferente de 1-3 e andar para a frente sem aparecer erro por exemplo meti 23 em vez de 2 e depois 3 na alinea a seguir e avançou
@@ -59,8 +74,8 @@ def mostraTabuleiro(tabuleiro, linha, coluna):
 def menuJogo():
     print(".... JOGO DO GALO ....")
     print("1 - Jogar")
-    print("2 - Sair")
-    print("3 - Personalizar")
+    print("2 - Personalizar")
+    print("3 - Sair")
     opcao = int(input("Escolha uma opção: "))
     return opcao
 
@@ -124,7 +139,9 @@ def jogo(galo, sJ1, sJ2):
             print(" -- Empate!")
             return "empate"
     return None #returna nada para prevenir erros(é uma proteção do código)
-
+jogador1 = ["", "X", "", 0]
+jogador2 = ["", "O", "", 0]
+empates = 0
 
 
 while True:
@@ -134,8 +151,8 @@ while True:
     galo = criaTabuleiro(3, 3, 0)
     galo = inicializaTabuleiro(galo, 3, 3, ' ')
 
-    jogador1 = ["", "X", "", 0]
-    jogador2 = ["", "O", "", 0]
+    """ jogador1 = ["", "X", "", 0]
+    jogador2 = ["", "O", "", 0] """
 
     # Dados dos jogadores: [nome, símbolo, vitórias]
     jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
@@ -146,11 +163,11 @@ while True:
     else:
         # Define o símbolo automaticamente para o computador
         jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
-
     simboloJ1 = jogador1[1]
     simboloJ2 = jogador2[1]
+    
 
-    empates = 0
+    
 
 
     if opcao == 1:
@@ -173,8 +190,22 @@ while True:
 
             # Opcional: alterna os símbolos para a próxima partida
             simboloJ1, simboloJ2 = simboloJ2, simboloJ1
+        """
+    elif opção ==2:
+            # Dados dos jogadores: [nome, símbolo, vitórias]
+        jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
+        escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
+        # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
+        if escolha == 1:
+            jogador2 = [input("Nome do segundo jogador: "), "O" if jogador1[1] == "X" else "X", 0]
+        else:
+            # Define o símbolo automaticamente para o computador
+            jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
+        simboloJ1 = jogador1[1]
+        simboloJ2 = jogador2[1]   
 
-    elif opcao == 2:
+        """
+    elif opcao == 3:
         print("A sair do jogo....")
         print("\n--- Resumo do Jogo ---")
         if jogador1[0]!="":

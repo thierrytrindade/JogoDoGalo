@@ -10,6 +10,7 @@
 #### O X está predefinido como o simbolo para o jogador 1 deseja muda-lo S/N permitindo assim simplificar o codigo para s ou n
 #### no menu deve ter uma parte para personalizar por exmeplo as cores que ainda nao fiz 
 # DEPOIS NO FIM FAZE A FILTRAGEM ANTI AI!
+# opção para jogar quantas partidas quiseres(Infinito)
 
 ________________
 
