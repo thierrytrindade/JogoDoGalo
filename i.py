@@ -51,19 +51,22 @@ questionar se querem voltar a jogar (novo jogo)
 
 
 
-def resumo(nome1,nome2,vitorias1,vitorias2,empate):
-    numeroDeJogos = 0
-    print("\n--- Resumo do(s)", numeroDeJogos," Jogo(s) ---")
-    numeroDeJogos=vitorias1+vitorias2+empates
-    if nome1!="":
-        print("Jogador 1 (", nome1, ") :", vitorias1, " vitória(s),",vitorias1/numeroDeJogos,"%")    
+def resumo(nome1, nome2, vitorias1, vitorias2, empates):
+    numeroDeJogos = vitorias1 + vitorias2 + empates
+    print("\n--- Resumo do(s)", numeroDeJogos, "Jogo(s) ---")
+    if numeroDeJogos > 0:
+        if nome1 != "":
+            print("Jogador 1 (", nome1, ") :", vitorias1, " vitória(s),", (vitorias1 / numeroDeJogos) * 100, "%")
+        else:
+            print("Jogador 1 :", vitorias1, " vitória(s),", (vitorias1 / numeroDeJogos) * 100, "%")
+        if nome2 != "":
+            print("Jogador 2 (", nome2, ") :", vitorias2, " vitória(s),", (vitorias2 / numeroDeJogos) * 100, "%")
+        else:
+            print("Jogador 2 :", vitorias2, " vitória(s),", (vitorias2 / numeroDeJogos) * 100, "%")
+        
+        print("Empates:", empates)    
     else:
-        print("Jogador 1 :", vitorias1, " vitória(s),",vitorias1/numeroDeJogos,"%")
-    if nome2!="":
-        print("Jogador 2 (", nome2, ") :", vitorias2, " vitória(s),",vitorias2/numeroDeJogos,"%")
-    else:
-        print("Jogador 2 :", vitorias2, " vitória(s),",vitorias2/numeroDeJogos,"%")
-    print("Empates:", empate)
+        print("Nenhuma partida foi concluída!")
 
 def criaTabuleiro(linha, coluna, valor):
     tabuleiro = [] # tabuleiro é igual a matriz
