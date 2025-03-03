@@ -111,85 +111,34 @@ def jogo(galo, sJ1, sJ2):
             return "empate"
     return None #returna nada para prevenir erros(é uma proteção do código)
 
-# Programa principal
-galo = criaTabuleiro(3, 3, 0)
-galo = inicializaTabuleiro(galo, 3, 3, ' ')
 
-""" # Definir os símbolos dos jogadores
-simboloJ1 = 'X'
-simboloJ2 = 'O' """
 
-jogador1 = ["", "X", "", 0]
-jogador2 = ["", "O", "", 0]
-
-"""
 while True:
     opcao = menuJogo()
-    if opcao == 1:
-        while True: #Jogar enquanto os jogadores o entenderem  
-            galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
 
-            # Realiza uma partida
-            resultado = jogo(galo, simboloJ1, simboloJ2)
-            # Atualiza estatísticas
-            if resultado == simboloJ1:
-                jogador1[2] += 1
-            elif resultado == simboloJ2:
-                jogador2[2] += 1
-            elif resultado == "empate":
-                empates += 1
-            # Pergunta se deseja continuar jogando
-            continuar = input("Deseja jogar novamente (S/N): ").upper()
-            if continuar == "N":
-                break
+    # Programa principal
+    galo = criaTabuleiro(3, 3, 0)
+    galo = inicializaTabuleiro(galo, 3, 3, ' ')
 
-            # Opcional: alterna os símbolos para a próxima partida
-            simboloJ1, simboloJ2 = simboloJ2, simboloJ1
+    jogador1 = ["", "X", "", 0]
+    jogador2 = ["", "O", "", 0]
 
-    elif opcao == 2:
-        print("A sair do jogo....")
-        print("\n--- Resumo do Jogo ---")
-        print("Jogador 1 (", jogador1[0], "): ", jogador1[2], " vitória(s)", sep="")
-        print("Jogador 2 (", jogador2[0], "): ", jogador2[2], " vitória(s)", sep="")
-        print("Empates:", empates)
-        break
-    
-    elif opcao == 3:
-        # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
-        escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-        # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
-        if escolha == 1:
-            jogador2 = [input("Nome do segundo jogador: "), "O" if jogador1[1] == "X" else "X", 0]
-        else:
-            # Define o símbolo automaticamente para o computador
-            jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
+    # Dados dos jogadores: [nome, símbolo, vitórias]
+    jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
+    escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
+    # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
+    if escolha == 1:
+        jogador2 = [input("Nome do segundo jogador: "), "O" if jogador1[1] == "X" else "X", 0]
     else:
-        print("Opção inválida")
+        # Define o símbolo automaticamente para o computador
+        jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
+
+    simboloJ1 = jogador1[1]
+    simboloJ2 = jogador2[1]
+
+    empates = 0
 
 
-
-"""
-
-
-
-# Dados dos jogadores: [nome, símbolo, vitórias]
-jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
-escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-# escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
-if escolha == 1:
-    jogador2 = [input("Nome do segundo jogador: "), "O" if jogador1[1] == "X" else "X", 0]
-else:
-    # Define o símbolo automaticamente para o computador
-    jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
-
-simboloJ1 = jogador1[1]
-simboloJ2 = jogador2[1]
-
-empates = 0
-
-while True:
-    opcao = menuJogo()
     if opcao == 1:
         while True: #Jogar enquanto os jogadores o entenderem  
             galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
