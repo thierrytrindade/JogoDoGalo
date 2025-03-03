@@ -34,20 +34,7 @@ END = "\033[0m"  #Anula a formatação anterior
 
 # Jogo do Galo
 # Rotinas
-"""
-Estrutura de dados
-Matriz 3x3 | vetor 9 elementos
-num_vitorias por jogador, num_empates
 
-criar a matriz/vetor 
-inicializar a matriz (tabuleiro de jogo)
-mostrar a matriz (tabuleiro de jogo)
-mostrar menu do jogo
-ler uma jogada e preencher o tabuleiro
-verificar se após jogada alguém ganhou
-atualizar a pontuação do jogo
-questionar se querem voltar a jogar (novo jogo)
-"""
 
 
 
@@ -55,16 +42,9 @@ def resumo(nome1, nome2, vitorias1, vitorias2, empates):
     numeroDeJogos = vitorias1 + vitorias2 + empates
     print("\n--- Resumo do(s)", numeroDeJogos, "Jogo(s) ---")
     if numeroDeJogos > 0:
-        if nome1 != "":
-            print("Jogador 1 (", nome1, ") :", vitorias1, " vitória(s),", (vitorias1 / numeroDeJogos) * 100, "%")
-        else:
-            print("Jogador 1 :", vitorias1, " vitória(s),", (vitorias1 / numeroDeJogos) * 100, "%")
-        if nome2 != "":
-            print("Jogador 2 (", nome2, ") :", vitorias2, " vitória(s),", (vitorias2 / numeroDeJogos) * 100, "%")
-        else:
-            print("Jogador 2 :", vitorias2, " vitória(s),", (vitorias2 / numeroDeJogos) * 100, "%")
-        
-        print("Empates:", empates)    
+        print(nome1, "têm", vitorias1, " vitória(s),", (vitorias1 / numeroDeJogos) * 100, "%")
+        print(nome2, "têm", vitorias2, " vitória(s),", (vitorias2 / numeroDeJogos) * 100, "%")
+        print("Empates:", empates, ",", (empates / numeroDeJogos) * 100, "%")    
     else:
         print("Nenhuma partida foi concluída!")
 
@@ -160,9 +140,21 @@ def jogo(galo, sJ1, sJ2):
             print(" -- Empate!")
             return "empate"
     return None #returna nada para prevenir erros(é uma proteção do código)
-jogador1 = ["", "X", "", 0]
-jogador2 = ["", "O", "", 0]
+
+# Definir variáveis de estatísticas fora do loop principal
+jogador1 = ["Jogador 1", "X", "cor", 0]
+
+jogador2 = ["Jogador 2", "O", "cor", 0]
 empates = 0
+
+# A RETIFICAR DEPOIS !
+if jogador1[1] != "X" and jogador1[1] != "O":
+    jogador1[1] = "X"
+    
+if jogador1[1] == "X":
+    jogador2[1] = "O"
+else:
+    jogador2[1]= "X"
 
 
 while True:
@@ -172,26 +164,15 @@ while True:
     galo = criaTabuleiro(3, 3, 0)
     galo = inicializaTabuleiro(galo, 3, 3, ' ')
 
-    """ jogador1 = ["", "X", "", 0]
-    jogador2 = ["", "O", "", 0] """
-
-    # Dados dos jogadores: [nome, símbolo, vitórias]
-    jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
-    escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-    # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
-    if escolha == 1:
-        jogador2 = [input("Nome do segundo jogador: "), "O" if jogador1[1] == "X" else "X", 0]
-    else:
-        # Define o símbolo automaticamente para o computador
-        jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
-    simboloJ1 = jogador1[1]
-    simboloJ2 = jogador2[1]
-    
-
-    
-
 
     if opcao == 1:
+        
+
+        simboloJ1 = jogador1[1]
+        simboloJ2 = jogador2[1]
+        # ATÉ AQUI !
+
+
         while True: #Jogar enquanto os jogadores o entenderem  
             galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
 
@@ -199,9 +180,9 @@ while True:
             resultado = jogo(galo, simboloJ1, simboloJ2)
             # Atualiza estatísticas
             if resultado == simboloJ1:
-                jogador1[2] += 1
+                jogador1[3] += 1
             elif resultado == simboloJ2:
-                jogador2[2] += 1
+                jogador2[3] += 1
             elif resultado == "empate":
                 empates += 1
             # Pergunta se deseja continuar jogando
@@ -212,10 +193,12 @@ while True:
                 print("\n"*130)# Turna o jogo mais "limpo", mostrando só o tabuleiro
             # Opcional: alterna os símbolos para a próxima partida
             simboloJ1, simboloJ2 = simboloJ2, simboloJ1
-        """
-    elif opção ==2:
+
+
+
+    elif opcao == 2:
             # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0]
+        jogador1 = [input("Nome do primeiro jogador: "), input("Qual símbolo que quer utilizar (X ou O): ").upper(), 0] # RETIFICAR A VALIDACAO DO SIMBOLO É NECESSARIA ISTO É APENAS TEMPORARIO PARA REALIZAR A VERIFICACAO DO RESUMO ESTATISTICO
         escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
         # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
         if escolha == 1:
@@ -223,26 +206,17 @@ while True:
         else:
             # Define o símbolo automaticamente para o computador
             jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
+        
         simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]   
+        simboloJ2 = jogador2[1]
+        
 
-        """
     elif opcao == 3:
         print("A sair do jogo....")
 
-        resumo(jogador1[0], jogador2[0], jogador1[2], jogador2[2], empates)
+        resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
 
-        """ print("\n--- Resumo do Jogo ---")
-        if jogador1[0]!="":
-            print("Jogador 1 (", jogador1[0], ") :", jogador1[2], " vitória(s)")    
-        else:
-            print("Jogador 1 :", jogador1[2], " vitória(s)")
-        if jogador2[0]!="":
-            print("Jogador 2 (", jogador2[0], ") :", jogador2[2], " vitória(s)")
-        else:
-            print("Jogador 2 :", jogador2[2], " vitória(s)") 
-            
-        print("Empates:", empates)"""
+
         break
 
 
