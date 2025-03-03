@@ -1,4 +1,4 @@
-Enumere a cor que deseja utilizar para os seus simbolos
+""" Enumere a cor que deseja utilizar para os seus simbolos
 
 1	 - 	AMARELO = "\033[1;33m"
 2	 - 	AZUL = "\033[1;34m"
@@ -10,4 +10,4 @@ Enumere a cor que deseja utilizar para os seus simbolos
 8	 - 	ROXO = "\033[1;35m"
 9	 - 	VERDE = "\033[1;32m"
 10	 - 	VERMELHO = "\033[1;31m"
-
+ """
