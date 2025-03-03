@@ -46,7 +46,7 @@ def menuJogo():
     print(".... JOGO DO GALO ....")
     print("1 - Jogar")
     print("2 - Sair")
-    #print("3 - Personalizar")
+    print("3 - Personalizar")
     opcao = int(input("Escolha uma opção: "))
     return opcao
 
