@@ -186,6 +186,25 @@ while True:
             # Define o símbolo automaticamente para o computador
             jogador2 = ["Computador", "O" if jogador1[1] == "X" else "X", 0]
         """
+        """
 
+Enumere a cor que deseja utilizar para os seus simbolos
+1 - PRETO = "\033[0;30m"
+2 - VERMELHO = "\033[0;31m"
+3 - VERDE = "\033[0;32m"
+4 - CASTANHO = "\033[0;33m"
+5 - AZUL = "\033[0;34m"
+6 - ROXO = "\033[0;35m"
+7 - CIANO = "\033[0;36m"
+8 - CINZENTO CLARO = "\033[0;37m"
+9 - CINZENTO_ESCURO = "\033[1;30m"
+10 - VERMELHO_CLARO = "\033[1;31m"
+11 - VERDE_CLARO = "\033[1;32m"
+12 - AMARELO = "\033[1;33m"
+13 - AZUL_CLARO = "\033[1;34m"
+14 - ROXO_CLARO = "\033[1;35m"
+15 - CIANO_CLARO = "\033[1;36m"
+16 - BRANCO_CLARO = "\033[1;37m"
+        """
     else:
         print("Opção inválida")
