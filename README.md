@@ -10,7 +10,8 @@
 #### O X está predefinido como o simbolo para o jogador 1 deseja muda-lo S/N permitindo assim simplificar o codigo para s ou n
 #### no menu deve ter uma parte para personalizar por exmeplo as cores que ainda nao fiz 
 # DEPOIS NO FIM FAZE A FILTRAGEM ANTI AI!
-# opção para jogar quantas partidas quiseres(Infinito)
+# Opção para jogar quantas partidas quiseres(Infinito)
+# Depois de começar outra batalha resetar as informações
 
 ________________
 
@@ -31,7 +32,7 @@ ________________
 2. contabilizar as vitórias de cada jogador.
 3. fazer batalhas: melhor de 3; melhor de 5; personalizar o número de jogos da batalha; resumo estatístico dos jogos efetuados na batalha.
 4. jogar contra o computador;
-5. interromper o jogo em qualquer jogada, através da introdução de um caracter à escolha dos jogadores, dando a vitória ao outro jogador.
+5. interromper o jogo em qualquer jogada, através da introdução de um caracter à escolha dos jogadores, dando a vitória ao outro jogador. # deixar una predefenição
 
 ##### O programa deverá ser construído recorrendo a estruturas de dados simples e a arrays unidimensionais ou bidimensionais e à modularização e otimização do código.
 Critérios de avaliação:
