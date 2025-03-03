@@ -227,7 +227,7 @@ while True:
     elif opcao == 3:
         print("A sair do jogo....")
 
-        resumo(jogador1[0],jogador2[0],jogador1[2],jogador2[2],empates)
+        resumo(jogador1[0], jogador2[0], jogador1[2], jogador2[2], empates)
 
         """ print("\n--- Resumo do Jogo ---")
         if jogador1[0]!="":
