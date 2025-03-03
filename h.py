@@ -66,7 +66,6 @@ def inicializaTabuleiro(tabuleiro, linha, coluna, valor):
     return tabuleiro
 
 def mostraTabuleiro(tabuleiro, linha, coluna):
-    print("\n"*130)# Turna o jogo mais "limpo", mostrando só o tabuleiro
     for i in range(linha):
         for j in range(coluna):
             print(tabuleiro[i][j], end=' ')
@@ -123,13 +122,14 @@ def jogo(galo, sJ1, sJ2):
                     print("Coordenadas inválidas! Por favor insira valores entre 1 a 3.")
                     continue
                 else:
-                    break 
+                    break
+            print("\n"*130)# Turna o jogo mais "limpo", mostrando só o tabuleiro 
             if galo[linha-1][coluna-1] == '_':
                 galo[linha-1][coluna-1] = simbolo
                 break     
             else:
-                print("\n------ Posição ocupada, escolha outra!!!\n")   
-        
+                print("\n------ Posição ocupada, escolha outra!!!\n") 
+                mostraTabuleiro(galo, 3, 3)
         # Verifica se houve vencedor
         if verificaVencedor(galo, simbolo):
             mostraTabuleiro(galo, 3, 3)
@@ -188,7 +188,8 @@ while True:
             continuar = input("Deseja jogar novamente (S/N): ").upper()
             if continuar == "N":
                 break
-
+            else: 
+                print("\n"*130)# Turna o jogo mais "limpo", mostrando só o tabuleiro
             # Opcional: alterna os símbolos para a próxima partida
             simboloJ1, simboloJ2 = simboloJ2, simboloJ1
         """
