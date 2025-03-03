@@ -50,6 +50,21 @@ questionar se querem voltar a jogar (novo jogo)
 """
 
 
+
+def resumo(nome1,nome2,vitorias1,vitorias2,empate):
+    numeroDeJogos = 0
+    print("\n--- Resumo do(s)", numeroDeJogos," Jogo(s) ---")
+    numeroDeJogos=vitorias1+vitorias2+empates
+    if nome1!="":
+        print("Jogador 1 (", nome1, ") :", vitorias1, " vitória(s),",vitorias1/numeroDeJogos,"%")    
+    else:
+        print("Jogador 1 :", vitorias1, " vitória(s),",vitorias1/numeroDeJogos,"%")
+    if nome2!="":
+        print("Jogador 2 (", nome2, ") :", vitorias2, " vitória(s),",vitorias2/numeroDeJogos,"%")
+    else:
+        print("Jogador 2 :", vitorias2, " vitória(s),",vitorias2/numeroDeJogos,"%")
+    print("Empates:", empate)
+
 def criaTabuleiro(linha, coluna, valor):
     tabuleiro = [] # tabuleiro é igual a matriz
     for i in range(linha):
@@ -211,7 +226,10 @@ while True:
         """
     elif opcao == 3:
         print("A sair do jogo....")
-        print("\n--- Resumo do Jogo ---")
+
+        resumo(jogador1[0],jogador2[0],jogador1[2],jogador2[2],empates)
+
+        """ print("\n--- Resumo do Jogo ---")
         if jogador1[0]!="":
             print("Jogador 1 (", jogador1[0], ") :", jogador1[2], " vitória(s)")    
         else:
@@ -219,9 +237,9 @@ while True:
         if jogador2[0]!="":
             print("Jogador 2 (", jogador2[0], ") :", jogador2[2], " vitória(s)")
         else:
-            print("Jogador 2 :", jogador2[2], " vitória(s)")
+            print("Jogador 2 :", jogador2[2], " vitória(s)") 
             
-        print("Empates:", empates)
+        print("Empates:", empates)"""
         break
 
 
