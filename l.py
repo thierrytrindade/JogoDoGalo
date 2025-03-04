@@ -93,7 +93,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
         print(".... JOGO DO GALO ....")
         print("1 - Jogar")
         print("2 - Personalizar")
-        if temResumo > 0:
+        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
             print("3 - Ver resumo")
             print("4 - Limpar os dados")
         print("9 - Sair")
@@ -106,6 +106,16 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
             """ continue """
         else : 
             return opcao
+
+
+
+
+
+        
+# menuJogarBase
+## 
+# menuJogoJversosJ
+# menuJogoJversosC
 
 
 
