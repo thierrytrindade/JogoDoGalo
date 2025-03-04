@@ -69,50 +69,45 @@ def mostraTabuleiro(tabuleiro, linha, coluna):
             print(tabuleiro[i][j], end=' ')
         print()
 
+
+
+
+
+
+
+
 def menuJogo(vitorias1, vitorias2, empates):
     temResumo = vitorias1 + vitorias2 + empates
-    print(".... JOGO DO GALO ....")
-    print("1 - Jogar")
-    print("2 - Personalizar")
-    if temResumo > 0 :
-        print("3 - Ver resumo")
-        print("4 - Limpar os dados")
-
-    print("9 - Sair")
-    opcao = int(input("Escolha uma opção: "))
-    while opcao not in (1,2,9) and temResumo==0:
-            print("\n"*130)
-            print(".... JOGO DO GALO ....")
-            print("1 - Jogar")
-            print("2 - Personalizar")
-            print("9 - Sair")                
-            print("Entrada inválida! Por favor, insira um número válido.444")
-            opcao = int(input("Escolha uma opção: "))      
+    opcoes_validas = (1, 2, 9) if temResumo == 0 else (1, 2, 3, 4, 9)
     
-            #else:
-             #   continue
-            
-    while opcao not in (1,2,3,4,9) and temResumo!=0:
-            print("\n"*130)
-            print(".... JOGO DO GALO ....")
-            print("1 - Jogar")
-            print("2 - Personalizar")
+    while True:
+        print("\n"*130)
+
+        print(".... JOGO DO GALO ....")
+        print("1 - Jogar")
+        print("2 - Personalizar")
+        if temResumo > 0:
             print("3 - Ver resumo")
             print("4 - Limpar os dados")
-            print("9 - Sair")
-                
-            print("Entrada inválida! Por favor, insira um número válido.555")
-            opcao = input("Escolha uma opção: ")
-            
-              
+        print("9 - Sair")
         
+        
+        opcao = int(input("Escolha uma opção: "))
+        if not opcao:
+            print("Entrada inválida! Por favor, insira um número válido.")
+            continue
+        if opcao in opcoes_validas:
+            return opcao
+        else:
+            print("Entrada inválida! Por favor, insira um número válido.")
 
-    """ if temResumo==0 and opcao not in (1,2,9):
-        print("Entrada inválida! Por favor, insira um número válido.")
-    elif opcao not in (1,2,3,9):
-        print("Entrada inválida! Por favor, insira um número válido.") """
-    return opcao
 
+
+
+
+
+
+            
 def verificaVencedor(tabuleiro, simbolo):
     # Verifica linhas e colunas
     for i in range(3):

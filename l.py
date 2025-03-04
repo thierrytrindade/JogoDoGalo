@@ -34,7 +34,12 @@ END = "\033[0m"  #Anula a formatação anterior
 
 # Jogo do Galo
 # Rotinas
+
+
+#Funções e seus significados
+#continue - serve para recomeçar um while
 opcao = 0
+espaco = "\n"*100
 
 
 
@@ -69,50 +74,44 @@ def mostraTabuleiro(tabuleiro, linha, coluna):
             print(tabuleiro[i][j], end=' ')
         print()
 
-def menuJogo(vitorias1, vitorias2, empates):
-    temResumo = vitorias1 + vitorias2 + empates
-    print(".... JOGO DO GALO ....")
-    print("1 - Jogar")
-    print("2 - Personalizar")
-    if temResumo > 0 :
-        print("3 - Ver resumo")
-        print("4 - Limpar os dados")
 
-    print("9 - Sair")
-    opcao = int(input("Escolha uma opção: "))
-    while opcao not in (1,2,9) and temResumo==0:
-            print("\n"*130)
-            print(".... JOGO DO GALO ....")
-            print("1 - Jogar")
-            print("2 - Personalizar")
-            print("9 - Sair")                
-            print("Entrada inválida! Por favor, insira um número válido.444")
-            opcao = int(input("Escolha uma opção: "))      
-    
-            #else:
-             #   continue
-            
-    while opcao not in (1,2,3,4,9) and temResumo!=0:
-            print("\n"*130)
-            print(".... JOGO DO GALO ....")
-            print("1 - Jogar")
-            print("2 - Personalizar")
+
+
+
+
+
+
+def menuJogo(vitorias1, vitorias2, empates,espaco):
+    temResumo = vitorias1 + vitorias2 + empates
+    print(espaco)
+    if temResumo == 0:
+        opcoesValidas = (1, 2, 9)
+    else:
+        opcoesValidas = (1, 2, 3, 4, 9)
+    while True:
+        
+        print(".... JOGO DO GALO ....")
+        print("1 - Jogar")
+        print("2 - Personalizar")
+        if temResumo > 0:
             print("3 - Ver resumo")
             print("4 - Limpar os dados")
-            print("9 - Sair")
-                
-            print("Entrada inválida! Por favor, insira um número válido.555")
-            opcao = input("Escolha uma opção: ")
+        print("9 - Sair")
+
+        opcao = int(input("Escolha uma opção: "))
+
+        if opcao not in opcoesValidas:
+            print(espaco)
+            print("Entrada inválida! Por favor, insira um número válido.")
+            """ continue """
+        else : 
+            return opcao
+
+
+
+
+
             
-              
-        
-
-    """ if temResumo==0 and opcao not in (1,2,9):
-        print("Entrada inválida! Por favor, insira um número válido.")
-    elif opcao not in (1,2,3,9):
-        print("Entrada inválida! Por favor, insira um número válido.") """
-    return opcao
-
 def verificaVencedor(tabuleiro, simbolo):
     # Verifica linhas e colunas
     for i in range(3):
@@ -129,7 +128,7 @@ def verificaEmpate(tabuleiro):
             return False  # Ainda há jogadas disponíveis
     return True  # Tabuleiro cheio, é empate
 
-def jogo(galo, sJ1, sJ2):
+def jogo(galo, sJ1, sJ2, espaco):
     for i in range(9):
         mostraTabuleiro(galo, 3, 3)
         # Alterna entre os jogadores
@@ -157,7 +156,7 @@ def jogo(galo, sJ1, sJ2):
                     continue
                 else:
                     break
-            print("\n"*130)# Turna o jogo mais "limpo", mostrando só o tabuleiro 
+            print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro 
             if galo[linha-1][coluna-1] == '_':
                 galo[linha-1][coluna-1] = simbolo
                 break     
@@ -194,7 +193,7 @@ else:
 
 
 while True:
-    opcao = menuJogo(jogador1[3], jogador2[3], empates)
+    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco)
 
     # Programa principal
     galo = criaTabuleiro(3, 3, 0)
@@ -226,7 +225,7 @@ while True:
             if continuar == "N":
                 break
             else: 
-                print("\n"*130)# Turna o jogo mais "limpo", mostrando só o tabuleiro
+                print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro
             # Opcional: alterna os símbolos para a próxima partida
             simboloJ1, simboloJ2 = simboloJ2, simboloJ1
 
@@ -259,13 +258,13 @@ while True:
         
     elif opcao == 3:
 
-        print("\n"*130)# Turna o jogo mais "limpo"
+        print(espaco)# Turna o jogo mais "limpo"
         resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
 
         
     elif opcao == 4:
 
-        print("\n"*130)# Turna o jogo mais "limpo"
+        print(espaco)# Turna o jogo mais "limpo"
         print("Os dados foram todos colocados com os valores padroes de inicio.")
         jogador1[0]="Jogador 1"
         jogador1[1]="X"
@@ -276,7 +275,7 @@ while True:
 
 
     elif opcao == 9:
-        print("\n"*130)# Turna o jogo mais "limpo"
+        print(espaco)# Turna o jogo mais "limpo"
         print("A sair do jogo....")
 
         resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
