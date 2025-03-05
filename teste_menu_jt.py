@@ -43,6 +43,7 @@ espaco = "\n"*100
 pResumo ="9 - Ver resumo\n10 - Limpar os dados"
 PSair = "12 - Sair"
 PVoltar ="11 - Voltar ao menu anterior"
+update=""
 
 
 
@@ -128,7 +129,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
 
 
 menuTemporario=1
-def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
+def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
     pResumo ="7 - Ver resumo\n8 - Limpar os dados"
     pSair = "9 - Sair"
     pVoltar ="9 - Voltar ao menu anterior"
@@ -187,13 +188,16 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
 
             if opcao == 7 or opcao == 8 : return opcao
 
-            elif opcao == 9 and menuTemporario !=1 : menuTemporario == 1
+            elif opcao == 9 and menuTemporario !=1 : menuTemporario = 1
 
             elif opcao == 9 and menuTemporario ==1 : return opcao
 
             elif menuTemporario == 1 and opcao == 1 : menuTemporario = 2
             
             elif menuTemporario == 1 and opcao == 2 : menuTemporario = 3
+
+            #elif opcao == 9 and menuTemporario == 2 : menuTemporario = 1
+            
 
             elif menuTemporario == 3 and opcao == 1 : opcao=5; return opcao
 
@@ -204,6 +208,8 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
             elif menuTemporario == 3 and opcao == 4 : opcao=11; return opcao
 
             elif menuTemporario == 3 and opcao == 5 : opcao=12; return opcao
+            
+            #elif menuTemporario == 3 and opcao == 9 : menuTemporario = 1
 
 
 
@@ -483,29 +489,31 @@ while True:
 
 
 
-    elif opcao == 5: #2.1wedsrawq   
+    elif opcao == 5: #3.1wedsrawq   
             # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador1[0]=input("Nome do primeiro jogador: ")
+        update="Personalização efetuada : O nome do jogador 1 é "+jogador1[0]
 
 
-    elif opcao == 6: #2.2
+    elif opcao == 6: #3.2
             # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador1[2]=input("Enumere a cor que deseja utilizar para os seus simbolos\n0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 -CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO")
-    
+        update="Personalização efetuada : A cor do jogador 1 é "+jogador1[2]
 
-    elif opcao == 10: #2.3
+    elif opcao == 10: #3.3
             # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador2[0]=input("Nome do primeiro jogador: ")
+        update="Personalização efetuada : O nome do jogador 2 é "+jogador2[0]
 
-
-    elif opcao == 11: #2.4
+    elif opcao == 11: #3.4
             # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador2[2]=input("Enumere a cor que deseja utilizar para os seus simbolos\n0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 -CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO")
-    
+        update="Personalização efetuada : A cor do jogador 2 é "+jogador2[2]
 
-    elif opcao == 12: #2.5
+    elif opcao == 12: #3.5
         jogador1[1]=input("Qual símbolo que quer utilizar (X ou O): ").upper()
         jogador2[1] = "O" if jogador1[1] == "X" else "X"
+        update="Personalização efetuada : "+jogador1[0]+"está neste momento com o simbolo "+jogador1[1]+"e " +jogador2[0]+"está com "+jogador2[1]
 
         
     elif opcao == 7:
