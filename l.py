@@ -112,10 +112,153 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
 
 
         
-# menuJogarBase
+# menuJogoBase
 ## 
 # menuJogoJversosJ
 # menuJogoJversosC
+
+
+
+
+def menuJogoBase(vitorias1, vitorias2, empates,espaco):
+    temResumo = vitorias1 + vitorias2 + empates
+    print(espaco)
+    if temResumo == 0:
+        opcoesValidas = (1, 2, 9)
+    else:
+        opcoesValidas = (1, 2, 3, 4, 9)
+    while True:
+        
+        print(".... JOGO DO GALO ....")
+        print("1 - Jogar contra outro jogador")
+        print("2 - Jogar contra o computador")
+        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+            print("3 - Ver resumo")
+            print("4 - Limpar os dados")
+        print("9 - Voltar ao menu anterior")
+
+        opcao = int(input("Escolha uma opção: "))
+
+        if opcao not in opcoesValidas:
+            print(espaco)
+            print("Entrada inválida! Por favor, insira um número válido.")
+            """ continue """
+        else : 
+            return opcao
+
+
+
+def menuJogoJversusJ(vitorias1, vitorias2, empates,espaco):
+    temResumo = vitorias1 + vitorias2 + empates
+    print(espaco)
+    if temResumo == 0:
+        opcoesValidas = (1, 2, 9)
+    else:
+        opcoesValidas = (1, 2, 3, 4, 9)
+    while True:
+        
+        print(".... JOGO DO GALO ....")
+        print("1 - Jogar")
+        print("2 - Personalizar")
+        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+            print("3 - Ver resumo")
+            print("4 - Limpar os dados")
+        print("9 - Voltar ao menu anterior")
+
+
+        opcao = int(input("Escolha uma opção: "))
+
+        if opcao not in opcoesValidas:
+            print(espaco)
+            print("Entrada inválida! Por favor, insira um número válido.")
+            """ continue """
+        else : 
+            return opcao
+
+
+
+def menuJogoJversusC(vitorias1, vitorias2, empates,espaco):
+    temResumo = vitorias1 + vitorias2 + empates
+    print(espaco)
+    if temResumo == 0:
+        opcoesValidas = (1, 2, 9)
+    else:
+        opcoesValidas = (1, 2, 3, 4, 9)
+    while True:
+        
+        print(".... JOGO DO GALO ....")
+        print("1 - Jogar")
+        print("2 - Personalizar")
+        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+            print("3 - Ver resumo")
+            print("4 - Limpar os dados")
+        print("9 - Voltar ao menu anterior")
+
+
+        opcao = int(input("Escolha uma opção: "))
+
+        if opcao not in opcoesValidas:
+            print(espaco)
+            print("Entrada inválida! Por favor, insira um número válido.")
+            """ continue """
+        else : 
+            return opcao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
