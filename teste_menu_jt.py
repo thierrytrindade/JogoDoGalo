@@ -478,14 +478,8 @@ while True:
 
 
 
-            print("2 - Mudar cor Jogador1")
-            print("3 - Mudar nome Jogador2")
-            print("4 - Mudar cor Jogador2")
-            print("5 - Mudar Simbolo")
 
-
-
-    elif opcao == 5: #2.1
+    elif opcao == 5: #2.1wedsrawq   
             # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador1[0]=input("Nome do primeiro jogador: ")
 
@@ -494,93 +488,20 @@ while True:
             # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador1[2]=input("Enumere a cor que deseja utilizar para os seus simbolos\n0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 -CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO")
     
-    elif opcao == 2: #2.3
+
+    elif opcao == 10: #2.3
             # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[0]=input("Nome do primeiro jogador: ")
-        jogador1[1]=input("Qual símbolo que quer utilizar (X ou O): ").upper()
-        jogador1[3]=0
-        # RETIFICAR A VALIDACAO DO SIMBOLO É NECESSARIA ISTO É APENAS TEMPORARIO PARA REALIZAR A VERIFICACAO DO RESUMO ESTATISTICO
-
-        escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-        # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
-        if escolha == 1:
-            
-            jogador2[0] = input("Nome do segundo jogador: ")
-            jogador2[1] = "O" if jogador1[1] == "X" else "X"
-            jogador2[3] = 0
-
-        else:
-            # Define o símbolo automaticamente para o computador
-            
-            jogador2[0] = "Computador"
-            jogador2[1] = "O" if jogador1[1] == "X" else "X"
-            jogador2[3] = 0
-        
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
+        jogador2[0]=input("Nome do primeiro jogador: ")
 
 
-    elif opcao == 2: #2.4
+    elif opcao == 11: #2.4
             # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[0]=input("Nome do primeiro jogador: ")
-        jogador1[1]=input("Qual símbolo que quer utilizar (X ou O): ").upper()
-        jogador1[3]=0
-        # RETIFICAR A VALIDACAO DO SIMBOLO É NECESSARIA ISTO É APENAS TEMPORARIO PARA REALIZAR A VERIFICACAO DO RESUMO ESTATISTICO
+        jogador2[2]=input("Enumere a cor que deseja utilizar para os seus simbolos\n0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 -CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO")
+    
 
-        escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-        # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
-        if escolha == 1:
-            
-            jogador2[0] = input("Nome do segundo jogador: ")
-            jogador2[1] = "O" if jogador1[1] == "X" else "X"
-            jogador2[3] = 0
-
-        else:
-            # Define o símbolo automaticamente para o computador
-            
-            jogador2[0] = "Computador"
-            jogador2[1] = "O" if jogador1[1] == "X" else "X"
-            jogador2[3] = 0
-        
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
-
-
-    elif opcao == 2: #2.5
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[0]=input("Nome do primeiro jogador: ")
-        jogador1[1]=input("Qual símbolo que quer utilizar (X ou O): ").upper()
-        jogador1[3]=0
-        # RETIFICAR A VALIDACAO DO SIMBOLO É NECESSARIA ISTO É APENAS TEMPORARIO PARA REALIZAR A VERIFICACAO DO RESUMO ESTATISTICO
-
-        escolha = int(input("\t1---> para jogar com outra pessoa\nOpção: "))
-        # escolha = int(input("\t1---> para jogar com outra pessoa\n\t2---> para jogar com o computador\nOpção: "))
-        if escolha == 1:
-            
-            jogador2[0] = input("Nome do segundo jogador: ")
-            jogador2[1] = "O" if jogador1[1] == "X" else "X"
-            jogador2[3] = 0
-
-        else:
-            # Define o símbolo automaticamente para o computador
-            
-            jogador2[0] = "Computador"
-            jogador2[1] = "O" if jogador1[1] == "X" else "X"
-            jogador2[3] = 0
-        
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
-
-
-
-    elif opcao == 2: #2.5
+    elif opcao == 12: #2.5
         jogador1[1]=input("Qual símbolo que quer utilizar (X ou O): ").upper()
         jogador2[1] = "O" if jogador1[1] == "X" else "X"
-
-
-
-
-
 
         
     elif opcao == 7:
