@@ -1,54 +1,7 @@
-""" 
-Enumere a cor que deseja utilizar para os seus simbolos
 
-0	 -	PREDEFENIDO
-1	 - 	AMARELO = "\033[1;33m"
-2	 - 	AZUL = "\033[1;34m"
-3	 - 	BRANCO = "\033[1;37m"
-4	 - 	CASTANHO = "\033[0;33m"
-5	 - 	CIANO = "\033[0;36m"
-6	 - 	CINZENTO = "\033[1;30m"
-7	 - 	PRETO = "\033[0;30m"
-8	 - 	ROXO = "\033[1;35m"
-9	 - 	VERDE = "\033[1;32m"
-10	 - 	VERMELHO = "\033[1;31m"
-END = "\033[0m"  #Anula a formatação anterior
- """
-PREDEFENIDO = 0
-AMARELO = "\033[1;33m"
-AZUL = "\033[1;34m"
-BRANCO = "\033[1;37m"
-CASTANHO = "\033[0;33m"
-CIANO = "\033[0;36m"
-CINZENTO = "\033[1;30m"
-PRETO = "\033[0;30m"
-ROXO = "\033[1;35m"
-VERDE = "\033[1;32m"
-VERMELHO = "\033[1;31m"
-END = "\033[0m"  #Anula a formatação anterior
-
-############# ERROS
-# meter um numero diferente de 1-3 e andar para a frente sem aparecer erro por exemplo meti 23 em vez de 2 e depois 3 na alinea a seguir e avançou
-# ADICIONAR A FUNCAO DE NAO DEFINIR O NOME DO JOGADOR
-# O JOGO SO DEVE PERMITIR 9 JOGADAS.
-
-# Jogo do Galo
-# Rotinas
-
-
-#Funções e seus significados
-#continue - serve para recomeçar um while
 opcao = 0
 espaco = "\n"*100
-pResumo ="9 - Ver resumo\n10 - Limpar os dados"
-PSair = "12 - Sair"
-PVoltar ="11 - Voltar ao menu anterior"
-
-
-
-
-
-
+menuTemporario=1
 
 
 def resumo(nome1, nome2, vitorias1, vitorias2, empates):
@@ -82,28 +35,81 @@ def mostraTabuleiro(tabuleiro, linha, coluna):
             print(tabuleiro[i][j], end=' ')
         print()
 
-
-
-
-
-
-
-
-def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
+menuTemporario=1
+def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
+    pResumo ="9 - Ver resumo\n10 - Limpar os dados"
+    pSair = "12 - Sair"
+    pVoltar ="11 - Voltar ao menu anterior"
+    pPvpe= "1 - Partida simples/indefenida (VER ERROS ORTHOGRAFICOS !)\n2 - Maior de 3\n3 - Maior de 5\n Parsonalizar o número de jogos"
+    
     temResumo = vitorias1 + vitorias2 + empates
     print(espaco)
-    if temResumo == 0:
-        opcoesValidas = (1, 2, 12)
-    else:
-        opcoesValidas = (1, 2, 9, 10, 12)
+    opcaoValidaEscolhida = 0
+    opcoesMenuAvancado = (3, 4, 5)
+
     while True:
-        
-        print(".... JOGO DO GALO ....")
-        print("1 - Jogar")
-        print("2 - Personalizar")
-        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
-            print(pResumo)
-        print(PSair)
+        if menuTemporario==1:
+            if temResumo == 0:
+                opcoesValidas = (1, 2, 9)
+            else:
+                opcoesValidas = (1, 2, 9) + (7, 8)
+            print(".... JOGO DO GALO ....")
+            print("1 - Jogar")
+            print("2 - Personalizar")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(pSair)
+
+            
+
+        if menuTemporario==2:
+            if temResumo == 0:
+                opcoesValidas = (1, 2, 9)
+            else:
+                opcoesValidas = (1, 2, 9) + (7, 8)
+            print(" .... => Jogar ....")
+            print("1 - Jogar contra outro jogador")
+            print("2 - Jogar contra o computador")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(pVoltar)
+            
+        if menuTemporario==3:
+            if temResumo == 0:
+                opcoesValidas = (1, 2, 3, 4, 9)
+            else:
+                opcoesValidas = (1, 2, 3, 4, 9) + (7, 8)
+            print(".... => Jogar contra outro jogador ....")
+            print(pPvpe)
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(pVoltar)
+            
+        if menuTemporario==4:
+            if temResumo == 0:
+                opcoesValidas = (1, 2, 3, 4, 9)
+            else:
+                opcoesValidas = (1, 2, 3, 4, 9) + (7, 8)
+            print(".... => Jogar contra o computador ....")
+            print(pPvpe)
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(pVoltar)
+            
+        if menuTemporario==5:
+            if temResumo == 0:
+                opcoesValidas = (1, 2, 3, 4, 5, 9)
+            else:
+                opcoesValidas = (1, 2, 3, 4, 5, 9) + (7, 8)
+            print(".... => Personalizar ....")
+            print("1 - Mudar nome Jogador1")
+            print("2 - Mudar cor Jogador1")
+            print("3 - Mudar nome Jogador2")
+            print("4 - Mudar cor Jogador2")
+            print("5 - Mudar Simbolo")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(pVoltar)
 
         opcao = int(input("Escolha uma opção: "))
 
@@ -112,17 +118,35 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
             print("Entrada inválida! Por favor, insira um número válido.")
             """ continue """
         else : 
-            return opcao
+
+            if opcao == 7 or opcao == 8 : return opcao
+
+            elif opcao == 9 and menuTemporario !=1 : menuTemporario == 0
+
+            elif opcao == 9 and menuTemporario ==1 : return opcao
+
+            elif menuTemporario == 1 and opcao == 1 : menuTemporario = 2
+            
+            elif menuTemporario == 1 and opcao == 2 : menuTemporario = 5
+
+            elif menuTemporario == 2 and opcao == 1 : menuTemporario = 3
+            
+            elif menuTemporario == 2 and opcao == 2 : menuTemporario = 4
+
+            elif menuTemporario == 2
+
+            elif menuTemporario == 3
+
+            elif menuTemporario == 4
+
+            elif menuTemporario == 5
+            
+                return opcao
+            """ 
+        if mmmm = x
+                return opcao """
 
 
-
-
-
-        
-# menuJogoBase
-## 
-# menuJogoJversosJ
-# menuJogoJversosC
 
 
 
@@ -209,75 +233,7 @@ def menuJogoJversusC(vitorias1, vitorias2, empates,espaco,pResumo,PVoltar):
             return opcao
 
 
-
-
-""" 
-        Partida simples/indefinida
-        #permitindo assim os jogadores jogarem quantas partidas quiserem sem haver nececidade de defenirem um numero previo de jogos visto que no fim de cada jogo terem a opção de poderem continuar a jogar.
-        Melhor de 3
-        Melhor de 5
-        Personalizar o numero de jogos
-
-
-        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
-            print("7 - Ver resumo")
-            print("8 - Limpar os dados")
-        print("9 - Voltar ao menu anterior")
-
- """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+          
 def verificaVencedor(tabuleiro, simbolo):
     # Verifica linhas e colunas
     for i in range(3):
@@ -464,3 +420,118 @@ while True:
 
     else:
         print("Opção inválida")
+
+
+def menuJogo(vitorias1, vitorias2, empates,espaco):
+    temResumo = vitorias1 + vitorias2 + empates
+    print(espaco)
+    
+    while True:
+        if temResumo == 0:
+            opcoesValidas = (1, 2, 12)
+        else:
+            opcoesValidas = (1, 2, 9, 10, 12)
+
+
+
+
+        """             
+        if temResumo == 0:
+            opcoesValidas = (1, 2, 12)
+        else:
+            opcoesValidas = (1, 2, 9, 10, 12)
+             """
+        
+
+
+        
+        if menuTemporario==0:
+            print(".... JOGO DO GALO ....")
+            print("1 - Jogar")
+            print("2 - Personalizar")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(PSair)
+
+            opcaoMenu = int(input("Escolha uma opção: "))
+
+            if opcaoMenu not in opcoesValidas:
+                print(espaco)
+                print("Entrada inválida! Por favor, insira um número válido.")
+                """ continue """
+            else : 
+                
+                opcoesValidas = (1, 2, 7, 8, 9)
+                if temResumo == 0:
+                if opcaoMenu==
+                return opcao
+
+
+
+
+
+
+        elif menuTemporario==1:
+            print(".... JOGAR ....")
+            print("1 - Jogar contra outro jogador")
+            print("2 - Jogar contra o computador")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(PSair)
+
+            opcaoMenu = int(input("Escolha uma opção: "))
+
+            if opcaoMenu not in opcoesValidas:
+                print(espaco)
+                print("Entrada inválida! Por favor, insira um número válido.")
+                """ continue """
+            else : 
+                return opcao
+        if menuTemporario==2:
+            print(".... JOGO DO GALO ....")
+            print("1 - Jogar")
+            print("2 - Personalizar")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(PSair)
+
+            opcaoMenu = int(input("Escolha uma opção: "))
+
+            if opcaoMenu not in opcoesValidas:
+                print(espaco)
+                print("Entrada inválida! Por favor, insira um número válido.")
+                """ continue """
+            else : 
+                return opcao
+        if menuTemporario==3:
+            print(".... JOGO DO GALO ....")
+            print("1 - Jogar")
+            print("2 - Personalizar")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(PSair)
+
+            opcaoMenu = int(input("Escolha uma opção: "))
+
+            if opcaoMenu not in opcoesValidas:
+                print(espaco)
+                print("Entrada inválida! Por favor, insira um número válido.")
+                """ continue """
+            else : 
+                return opcao
+        if menuTemporario==4:
+            print(".... JOGO DO GALO ....")
+            print("1 - Jogar")
+            print("2 - Personalizar")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print(PSair)
+
+            opcaoMenu = int(input("Escolha uma opção: "))
+
+            if opcaoMenu not in opcoesValidas:
+                print(espaco)
+                print("Entrada inválida! Por favor, insira um número válido.")
+                """ continue """
+            else : 
+                return opcao
