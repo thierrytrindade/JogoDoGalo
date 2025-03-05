@@ -195,12 +195,16 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
             
             elif menuTemporario == 1 and opcao == 2 : menuTemporario = 3
 
-            elif menuTemporario == 2
+            elif menuTemporario == 3 and opcao == 1 : opcao=5; return opcao
 
-            elif menuTemporario == 3
+            elif menuTemporario == 3 and opcao == 2 : opcao=6; return opcao
 
-            
-                return opcao
+            elif menuTemporario == 3 and opcao == 3 : opcao=10; return opcao
+
+            elif menuTemporario == 3 and opcao == 4 : opcao=11; return opcao
+
+            elif menuTemporario == 3 and opcao == 5 : opcao=12; return opcao
+
 
 
 
@@ -352,7 +356,7 @@ else:
 
 
 while True:
-    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco)
+    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco,menuTemporario)
 
     # Programa principal
     galo = criaTabuleiro(3, 3, 0)
