@@ -1,19 +1,4 @@
-""" 
-Enumere a cor que deseja utilizar para os seus simbolos
 
-0	 -	PREDEFENIDO
-1	 - 	AMARELO = "\033[1;33m"
-2	 - 	AZUL = "\033[1;34m"
-3	 - 	BRANCO = "\033[1;37m"
-4	 - 	CASTANHO = "\033[0;33m"
-5	 - 	CIANO = "\033[0;36m"
-6	 - 	CINZENTO = "\033[1;30m"
-7	 - 	PRETO = "\033[0;30m"
-8	 - 	ROXO = "\033[1;35m"
-9	 - 	VERDE = "\033[1;32m"
-10	 - 	VERMELHO = "\033[1;31m"
-END = "\033[0m"  #Anula a formatação anterior
- """
 PREDEFENIDO = 0
 AMARELO = "\033[1;33m"
 AZUL = "\033[1;34m"
@@ -119,25 +104,16 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
 
 
 
-        
-# menuJogoBase
-## 
-# menuJogoJversosJ
-# menuJogoJversosC
-
-
 
 
 menuTemporario=1
-def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
+def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogador1, jogador2):
     pResumo ="7 - Ver resumo\n8 - Limpar os dados"
     pSair = "9 - Sair"
     pVoltar ="9 - Voltar ao menu anterior"
     
     temResumo = vitorias1 + vitorias2 + empates
     print(espaco)
-    opcaoValidaEscolhida = 0
-    opcoesMenuAvancado = (3, 4, 5)
 
     while True:
         if menuTemporario==1:
@@ -170,16 +146,20 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
                 opcoesValidas = (1, 2, 3, 4, 5, 9) + (7, 8)
             print(update)
             print(".... => Personalizar ....")
-            print("1 - Mudar nome Jogador1")
-            print("2 - Mudar cor Jogador1")
-            print("3 - Mudar nome Jogador2")
-            print("4 - Mudar cor Jogador2")
+            print("1 - Mudar nome do(a) " + jogador1)
+            print("2 - Mudar cor do(a) " + jogador1)
+            print("3 - Mudar nome do(a) " + jogador2)
+            print("4 - Mudar cor do(a) " + jogador2)
             print("5 - Mudar Simbolo")
             if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
                 print(pResumo)
             print(pVoltar)
 
         opcao = int(input("Escolha uma opção: "))
+        while opcao == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            opcao = input("Escolha uma opção: ")
+        jogador1[0] = dado
 
         if opcao not in opcoesValidas:
             print(espaco)
@@ -211,73 +191,6 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
             elif menuTemporario == 3 and opcao == 5 : opcao=12; return opcao
             
             #elif menuTemporario == 3 and opcao == 9 : menuTemporario = 1
-
-
-
-
-""" 
-        Partida simples/indefinida
-        #permitindo assim os jogadores jogarem quantas partidas quiserem sem haver nececidade de defenirem um numero previo de jogos visto que no fim de cada jogo terem a opção de poderem continuar a jogar.
-        Melhor de 3
-        Melhor de 5
-        Personalizar o numero de jogos
-
-
-        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
-            print("7 - Ver resumo")
-            print("8 - Limpar os dados")
-        print("9 - Voltar ao menu anterior")
-
- """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -363,7 +276,7 @@ else:
 
 
 while True:
-    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco,menuTemporario, update)
+    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco,menuTemporario, update, jogador1[0], jogador2[0])
 
     # Programa principal
     galo = criaTabuleiro(3, 3, 0)
@@ -490,40 +403,52 @@ while True:
 
 
 
-    elif opcao == 5: #3.1wedsrawq   
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[0]=input("Nome do primeiro jogador: ")
-        update="Personalização efetuada : O nome do jogador 1 é "+jogador1[0]
-
-        
+    elif opcao == 5:  # 3.1wedsrawq
+    # Dados dos jogadores: [nome, símbolo, vitórias]
+        dado = input("Nome do primeiro jogador: ")
+        while dado == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            dado = input("Nome do primeiro jogador: ")
+        jogador1[0] = dado
+        update = "Personalização efetuada : O nome do jogador 1 é " + jogador1[0]
         menuTemporario = 3
 
-
-
-    elif opcao == 6: #3.2
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[2]=input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus simbolos : ")
-        update="Personalização efetuada : A cor do jogador 1 é "+jogador1[2]
+    elif opcao == 6:  # 3.2
+        cor = input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus símbolos: ")
+        while cor == "":
+            print("Você não digitou nada! Por favor, insira um valor válido.")
+            cor = input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus símbolos: ")
+        jogador1[2] = cor
+        update = "Personalização efetuada : A cor do jogador 1 é " + jogador1[2]
         menuTemporario = 3
 
-    elif opcao == 10: #3.3
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador2[0]=input("Nome do primeiro jogador: ")
-        update="Personalização efetuada : O nome do jogador 2 é "+jogador2[0]
+    elif opcao == 10:  # 3.3
+        dado = input("Nome do primeiro jogador: ")
+        while dado == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            dado = input("Nome do primeiro jogador: ")
+        jogador2[0] = dado
+        update = "Personalização efetuada : O nome do jogador 2 é " + jogador2[0]
         menuTemporario = 3
 
-    elif opcao == 11: #3.4
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador2[2]=input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus simbolos : ")
-        update="Personalização efetuada : A cor do jogador 2 é "+jogador2[2]
+    elif opcao == 11:  # 3.4
+        cor = input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus símbolos: ")
+        while cor == "":
+            print("Você não digitou nada! Por favor, insira um valor válido.")
+            cor = input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus símbolos: ")
+        jogador2[2] = cor
+        update = "Personalização efetuada : A cor do jogador 2 é " + jogador2[2]
         menuTemporario = 3
 
-    elif opcao == 12: #3.5
-        jogador1[1]=input("Qual símbolo que o "+jogador1[0]+" quer utilizar (X ou O): ").upper()
+    elif opcao == 12:  # 3.5
+        simbolo = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
+        while simbolo == "":
+            print("Você não digitou nada! Por favor, insira um símbolo válido.")
+            simbolo = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
+        jogador1[1] = simbolo
         jogador2[1] = "O" if jogador1[1] == "X" else "X"
-        update="Personalização efetuada : "+jogador1[0]+"está neste momento com o simbolo "+jogador1[1]+"e " +jogador2[0]+"está com "+jogador2[1]
+        update = "Personalização efetuada : " + jogador1[0] + " está neste momento com o símbolo " + jogador1[1] + " e " + jogador2[0] + " está com " + jogador2[1]
         menuTemporario = 3
-
         
     elif opcao == 7:
 
