@@ -115,12 +115,11 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
         if contaMenus==1 and Rodadas==1:
             contaMenus=0
             if temResumo == 0:
-                opcoesValidas = (1, 2, 9)
+                opcoesValidas = (1, 2, 3, 4, 9)
             else:
-                opcoesValidas = (1, 2, 7, 8, 9)
+                opcoesValidas = (1, 2, 3, 4, 7, 8, 9)
             print(".... JOGO DO GALO ....")
-            print("1 - Jogar contra outro jogador")
-            print("2 - Jogar contra o computador")
+            print("1 - Partida simples/indefenida (VER ERROS ORTHOGRAFICOS !)\n2 - Maior de 3\n3 - Maior de 5\n4 - Parsonalizar o número de jogos")
             if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
                 print(pResumo)
             print("9 - Voltar ao menu anterior")
@@ -133,15 +132,41 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
             print("1 - Mudar nome jogador 1")
             print("2 - Mudar cor jogador 1")
             print("3 - Mudar nome jogador 2")
-            print("2 - Mudar cor jogador 2")
+            print("4 - Mudar cor jogador 2")
             print("5 - Mudar simbolo ")
             if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
                 print(pResumo)
             print("9 - Voltar ao menu anterior")
             Verifica=1
         if Rodadas==3:
-            if contaMenus==1 and Verifica==0:
-                opção=
+            if Verifica==0:
+                if contaMenus==1:
+                    opção=1
+                    return opcao
+                if contaMenus==2:
+                    opção=2
+                    return opcao
+                if contaMenus==3:
+                    opção=3
+                    return opcao
+            if Verifica==1:
+                Verifica=0
+                if contaMenus==1:
+                    opção=4
+                    return opcao
+                if contaMenus==2:
+                    opção=5
+                    return opcao
+                if contaMenus==3:
+                    opção=6#Salta opção 7 e 8, pois ja fasso return atras
+                    return opcao
+                if contaMenus==4:
+                    opção=10
+                    return opcao
+                if contaMenus==5:
+                    opção=11
+                    return opcao
+
 
 
         contaMenus = int(input("Escolha uma opção: "))
@@ -154,8 +179,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
         elif contaMenus not in opcoesValidas:
             print(espaco)
             print("Entrada inválida! Por favor, insira um número válido.")
-        else : 
-            return opcao
+
 
         
 # menuJogoBase
