@@ -122,7 +122,14 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
     pResumo ="7 - Ver resumo\n8 - Limpar os dados"
     pSair = "9 - Sair"
     pVoltar ="9 - Voltar ao menu anterior"
-    
+
+
+    AMARELO = "\033[1;33m"  
+    END = "\033[0m"
+
+
+
+
     temResumo = vitorias1 + vitorias2 + empates
     print(espaco)
 
@@ -161,7 +168,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
                 opcoesValidas = ("1", "2", "3", "4", "5", "9") + ("7", "8")
                 
             print(espaco)
-            print(update)
+            print(AMARELO+update+END)
             print(".... => Personalizar ....")
             print("1 - Mudar nome do(a) " + jogador1)
             print("2 - Mudar cor do(a) " + jogador1)
@@ -214,15 +221,15 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
                 return 1, 2
             
 
-            elif menuTemporario == 3 and opcao == "1" : opcao="5"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "1" : opcao="2"; opcao=int(opcao); return 2, 1
 
-            elif menuTemporario == 3 and opcao == "2" : opcao="6"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "2" : opcao="3"; opcao=int(opcao); return 3, 1
 
-            elif menuTemporario == 3 and opcao == "3" : opcao="10"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "3" : opcao="4"; opcao=int(opcao); return 4, 1
 
-            elif menuTemporario == 3 and opcao == "4" : opcao="11"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "4" : opcao="5"; opcao=int(opcao); return 5, 1
 
-            elif menuTemporario == 3 and opcao == "5" : opcao="12"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "5" : opcao="6"; opcao=int(opcao); return 6, 1
             
             #elif menuTemporario == 3 and opcao == 9 : menuTemporario = 1
 
@@ -499,8 +506,142 @@ while True:
         break
 
 
-    else:
-        print("Opção inválida")
 
 
 #1 7 8 9
+
+
+#AGORA JUNTAR CODIGO
+
+
+
+
+
+    elif opcao == 2:  # 3.1wedsrawq
+    # Dados dos jogadores: [nome, símbolo, vitórias]
+        jogador1[0] = input("Nome do primeiro jogador: ")
+        while jogador1[0] == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            jogador1[0] = input("Nome do primeiro jogador: ")
+        update = "Personalização efetuada : O nome do jogador 1 é " + jogador1[0]
+        menuTemporario = 3
+
+    
+
+    elif opcao == 3:  # 3.2
+        inputCor = int(input(inputCores))
+        while inputCor == "":
+            print("Você não digitou nada! Por favor, insira um valor válido.")
+            inputCor = int(input(inputCores))
+
+            
+        if inputCor == 0 :
+            jogador1[2]=PREDEFENIDO
+            cor="Predefenido"
+        if inputCor == 1 : 
+            jogador1[2]=AMARELO
+            cor="Amarelo"
+        if inputCor == 2 :
+            jogador1[2]=AZUL
+            cor="Azul"
+        if inputCor == 3 :
+            jogador1[2]=BRANCO
+            cor="Branco"
+        if inputCor == 4 :
+            jogador1[2]=CIANO
+            cor="Ciano"
+        if inputCor == 5 :
+            jogador1[2]=ROXO
+            cor="Roxo"
+        if inputCor == 6 :
+            jogador1[2]=VERDE
+            cor="Verde"
+        if inputCor == 7 :
+            jogador1[2]=VERMELHO
+            cor="Vermelho"
+        update = "Personalização efetuada : A cor do(a) "+ jogador1[0]+" é " +jogador1[2]+cor+END
+        menuTemporario = 3
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    elif opcao == 4:  # 3.3
+        jogador2[0] = input("Nome do primeiro jogador: ")
+        while jogador2[0] == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            jogador2[0] = input("Nome do primeiro jogador: ")
+        update = "Personalização efetuada : O nome do jogador 2 é " + jogador2[0]
+        menuTemporario = 3
+
+    elif opcao == 11:  # 3.4
+        inputCor = int(input(inputCores))
+        while inputCor == "":
+            print("Você não digitou nada! Por favor, insira um valor válido.")
+            inputCor = int(input(inputCores))
+
+            
+        if inputCor == 0 :
+            jogador2[2]=PREDEFENIDO
+            cor="Predefenido"
+        if inputCor == 1 : 
+            jogador2[2]=AMARELO
+            cor="Amarelo"
+        if inputCor == 2 :
+            jogador2[2]=AZUL
+            cor="Azul"
+        if inputCor == 3 :
+            jogador2[2]=BRANCO
+            cor="Branco"
+        if inputCor == 4 :
+            jogador2[2]=CIANO
+            cor="Ciano"
+        if inputCor == 5 :
+            jogador2[2]=ROXO
+            cor="Roxo"
+        if inputCor == 6 :
+            jogador2[2]=VERDE
+            cor="Verde"
+        if inputCor == 7 :
+            jogador2[2]=VERMELHO
+            cor="Vermelho"
+        update = "Personalização efetuada : A cor do(a) "+ jogador2[0]+" é " +jogador2[2]+cor+END
+        menuTemporario = 3
+
+    elif opcao == 5:  # 3.5
+        jogador1[1] = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
+        while jogador1[1] == "":
+            print("Você não digitou nada! Por favor, insira um símbolo válido.")
+            jogador1[1] = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
+        jogador2[1] = "O" if jogador1[1] == "X" else "X"
+        update = "Personalização efetuada : " + jogador1[0] + " está neste momento com o símbolo " + jogador1[1] + " e " + jogador2[0] + " está com " + jogador2[1]
+        menuTemporario = 3
+
+     
+
+
+    elif opcao == 9:
+        print(espaco)# Turna o jogo mais "limpo"
+        print("A sair do jogo....")
+
+        resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
+
+
+        break
+
+
+    else:
+        print("Opção inválida")
