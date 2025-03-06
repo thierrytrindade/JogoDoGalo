@@ -122,7 +122,14 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
     pResumo ="7 - Ver resumo\n8 - Limpar os dados"
     pSair = "9 - Sair"
     pVoltar ="9 - Voltar ao menu anterior"
-    
+
+
+    AMARELO = "\033[1;33m"  
+    END = "\033[0m"
+
+
+
+
     temResumo = vitorias1 + vitorias2 + empates
     print(espaco)
 
@@ -161,7 +168,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
                 opcoesValidas = ("1", "2", "3", "4", "5", "9") + ("7", "8")
                 
             print(espaco)
-            print(update)
+            print(AMARELO+update+END)
             print(".... => Personalizar ....")
             print("1 - Mudar nome do(a) " + jogador1)
             print("2 - Mudar cor do(a) " + jogador1)
