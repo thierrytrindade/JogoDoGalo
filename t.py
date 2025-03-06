@@ -391,7 +391,10 @@ while True:
             """ # Opcional: alterna os símbolos para a próxima partida
             simboloJ1, simboloJ2 = simboloJ2, simboloJ1 """
             # Em vez de trocar apenas os símbolos, troque os dados completos:
-            jogador1, jogador2 = jogador2, jogador1
+            if resultado == simboloJ1:
+                jogador1, jogador2 = jogador2, jogador1
+                simboloJ1 = jogador1[1]
+                simboloJ2 = jogador2[1]
 
 
 
