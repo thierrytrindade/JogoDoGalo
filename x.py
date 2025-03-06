@@ -214,15 +214,15 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
                 return 1, 2
             
 
-            elif menuTemporario == 3 and opcao == "1" : opcao="5"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "1" : opcao="2"; opcao=int(opcao); return 2, 1
 
-            elif menuTemporario == 3 and opcao == "2" : opcao="6"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "2" : opcao="3"; opcao=int(opcao); return 3, 1
 
-            elif menuTemporario == 3 and opcao == "3" : opcao="10"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "3" : opcao="4"; opcao=int(opcao); return 4, 1
 
-            elif menuTemporario == 3 and opcao == "4" : opcao="11"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "4" : opcao="5"; opcao=int(opcao); return 5, 1
 
-            elif menuTemporario == 3 and opcao == "5" : opcao="12"; opcao=int(opcao); return opcao
+            elif menuTemporario == 3 and opcao == "5" : opcao="6"; opcao=int(opcao); return 6, 1
             
             #elif menuTemporario == 3 and opcao == 9 : menuTemporario = 1
 
@@ -505,105 +505,12 @@ while True:
 
 
 #AGORA JUNTAR CODIGO
-    elif opcao == 2:  # Modo "Maior de 3"
-        # Nesse modo, o primeiro a vencer duas partidas ganha; não há pergunta de continuar
-        # Inicializa os símbolos com cores:
-        simboloJ1 = jogador1[2] + jogador1[1] + END
-        simboloJ2 = jogador2[2] + jogador2[1] + END
-        galo = criaTabuleiro(3, 3, 0)
-        galo = inicializaTabuleiro(galo, 3, 3, '_')
-        # Zera os contadores para este modo (opcional ou pode ser acumulado)
-        jogador1[3] = 0
-        jogador2[3] = 0
-        empates = 0
-        while True:
-            galo = inicializaTabuleiro(galo, 3, 3, '_')
-            resultado = jogo(galo, simboloJ1, simboloJ2, espaco)
-            if resultado == simboloJ1:
-                jogador1[3] += 1
-            elif resultado == simboloJ2:
-                jogador2[3] += 1
-            elif resultado == "empate":
-                empates += 1
-            # Verifica se algum jogador já venceu duas partidas:
-            if jogador1[3] == 2 or jogador2[3] == 2:
-                numeroDeJogos = jogador1[3] + jogador2[3] + empates
-                print(espaco)
-                print(jogador1[0], "têm", jogador1[3], "vitória(s),", (jogador1[3] / numeroDeJogos) * 100, "%")
-                print(jogador2[0], "têm", jogador2[3], "vitória(s),", (jogador2[3] / numeroDeJogos) * 100, "%")
-                print("Empates:", empates, ",", (empates / numeroDeJogos) * 100, "%")
-                if jogador1[3] == 2:
-                    vencedor = jogador1[0]
-                elif jogador2[3] == 2:
-                    vencedor = jogador2[0]
-                print("\nO(a)"+vencedor+" foi o(a) primeiro(a) a vencer duas partidas é o vencedor do modo 'Maior de 3'!")
-                break
-            else:
-                # Em vez de trocar apenas os símbolos, troque os dados completos:
-                jogador1, jogador2 = jogador2, jogador1
-
-    elif opcao == 3: #1.3
-        
-
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
-        # ATÉ AQUI !
-
-
-        while True: #Jogar enquanto os jogadores o entenderem  
-            galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
-
-            # Realiza uma partida
-            resultado = jogo(galo, simboloJ1, simboloJ2)
-            # Atualiza estatísticas
-            if resultado == simboloJ1:
-                jogador1[3] += 1
-            elif resultado == simboloJ2:
-                jogador2[3] += 1
-            elif resultado == "empate":
-                empates += 1
-            # Pergunta se deseja continuar jogando
-            continuar = input("Deseja jogar novamente (S/N): ").upper()
-            if continuar == "N":
-                break
-            else: 
-                print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro
-            # Opcional: alterna os símbolos para a próxima partida
-            simboloJ1, simboloJ2 = simboloJ2, simboloJ1
-
-    elif opcao == 4: #1.4
-        
-
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
-        # ATÉ AQUI !
-
-
-        while True: #Jogar enquanto os jogadores o entenderem  
-            galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
-
-            # Realiza uma partida
-            resultado = jogo(galo, simboloJ1, simboloJ2)
-            # Atualiza estatísticas
-            if resultado == simboloJ1:
-                jogador1[3] += 1
-            elif resultado == simboloJ2:
-                jogador2[3] += 1
-            elif resultado == "empate":
-                empates += 1
-            # Pergunta se deseja continuar jogando
-            continuar = input("Deseja jogar novamente (S/N): ").upper()
-            if continuar == "N":
-                break
-            else: 
-                print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro
-            # Opcional: alterna os símbolos para a próxima partida
-            simboloJ1, simboloJ2 = simboloJ2, simboloJ1
 
 
 
 
-    elif opcao == 5:  # 3.1wedsrawq
+
+    elif opcao == 2:  # 3.1wedsrawq
     # Dados dos jogadores: [nome, símbolo, vitórias]
         jogador1[0] = input("Nome do primeiro jogador: ")
         while jogador1[0] == "":
@@ -614,7 +521,7 @@ while True:
 
     
 
-    elif opcao == 6:  # 3.2
+    elif opcao == 3:  # 3.2
         inputCor = int(input(inputCores))
         while inputCor == "":
             print("Você não digitou nada! Por favor, insira um valor válido.")
@@ -665,7 +572,7 @@ while True:
 
 
 
-    elif opcao == 10:  # 3.3
+    elif opcao == 4:  # 3.3
         jogador2[0] = input("Nome do primeiro jogador: ")
         while jogador2[0] == "":
             print("Você não digitou nada! Por favor, insira um nome válido.")
@@ -707,7 +614,7 @@ while True:
         update = "Personalização efetuada : A cor do(a) "+ jogador2[0]+" é " +jogador2[2]+cor+END
         menuTemporario = 3
 
-    elif opcao == 12:  # 3.5
+    elif opcao == 5:  # 3.5
         jogador1[1] = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
         while jogador1[1] == "":
             print("Você não digitou nada! Por favor, insira um símbolo válido.")
@@ -715,23 +622,7 @@ while True:
         jogador2[1] = "O" if jogador1[1] == "X" else "X"
         update = "Personalização efetuada : " + jogador1[0] + " está neste momento com o símbolo " + jogador1[1] + " e " + jogador2[0] + " está com " + jogador2[1]
         menuTemporario = 3
-        
-    elif opcao == 7:
 
-        print(espaco)# Turna o jogo mais "limpo"
-        resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
-
-        
-    elif opcao == 8:
-
-        print(espaco)# Turna o jogo mais "limpo"
-        print("Os dados foram todos colocados com os valores padroes de inicio.")
-        jogador1[0]="Jogador 1"
-        jogador1[1]="X"
-        jogador1[3]=0
-        jogador2[0] = "Jogador 2"
-        jogador2[1] = "O" if jogador1[1] == "X" else "X"
-        jogador2[3] = 0
      
 
 
