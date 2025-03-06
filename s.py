@@ -163,15 +163,16 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
                 print(pResumo)
             print(pVoltar)
 
-        opcao = input("Escolha uma opção: ")
+        
+        opcao = inputVazio("Escolha uma opção: ")
+        """ opcao = input("Escolha uma opção: ")
         while opcao == "":
             print("Você não digitou nada! Por favor, insira um nome válido.")
-            opcao = input("Escolha uma opção: ")
+            opcao = input("Escolha uma opção: ") """
 
         if opcao not in opcoesValidas:
             print(espaco)
             print("Entrada inválida! Por favor, insira um número válido.")
-            """ continue """
         else : 
 
             if opcao == "7" or opcao == "8" : opcao=int(opcao); return opcao
@@ -241,11 +242,12 @@ def jogo(galo, sJ1, sJ2, espaco):###############################################
         while True:        
             while True :
 
-
-                linha = input("Linha 1..3: ")
+                
+                linha = inputVazio("Linha 1..3: ")
+                """ linha = input("Linha 1..3: ")
                 if linha == "": # serve para prevenir que o utilizador nao entre um valor vazio
                     print("Você não digitou nada! Por favor, insira um valor válido.")
-                    continue
+                    continue """
                 if linha != "1" and linha != "2" and linha != "3": # serve para prevenir que o utilizador nao entre um valor nao autorizado
                     print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
                     continue
@@ -253,10 +255,11 @@ def jogo(galo, sJ1, sJ2, espaco):###############################################
                 break
 
             while True :
-                coluna = input("Coluna 1..3: ")
+                coluna = inputVazio("Coluna 1..3: ")
+                """ coluna = input("Coluna 1..3: ")
                 if coluna == "":
                     print("Você não digitou nada! Por favor, insira um valor válido.")
-                    continue
+                    continue """
                 if coluna != "1" and coluna != "2" and coluna != "3":
                     print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
                     continue
