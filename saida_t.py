@@ -29,3 +29,38 @@ print("\t║" + "Sair...".center(largura_total - 2) + "║")
 print("\t╚" + "═" * (largura_total - 2) + "╝")#Texto[Aquele que quero centralizar].center(largura[tamanho da largura total menos as bordas e tambem os emogis, pois ocupam mais de um espaço], caractere_de_preenchimento[Tem como predefenido o espaço se caso de não preenchimento]).
 #retirei os emogis do link:https://en.wikipedia.org/wiki/List_of_emojis
 
+#Menu
+
+#tirar
+temResumo=1
+
+
+
+largura_total = 60
+pResumo ="\t║" +"    7 - Ver resumo    ".center(largura_total - 2,".")+ "║"
+pLimpar="\t║" +"  8 - Limpar os dados  ".center(largura_total - 2,".")+ "║"
+pSair = "\t║" +"       9 - Sair       ".center(largura_total - 2,".")+ "║"
+pVoltar ="\t║" +"        9 - Voltar ao menu anterior       ".center(largura_total - 2,".")+ "║"
+espaco = "\n"*3
+print(espaco)
+print("\t╔" + "═" * (largura_total - 2) + "╗") 
+print("\t║" +"JOGO DO GALO".center(largura_total - 2,".") + "║")
+print("\t║" +"      1 - Jogar       ".center(largura_total - 2,".") + "║")
+print("\t║" +"   2 - Personalizar   ".center(largura_total - 2,".") + "║")
+print(pSair)
+print("\t╚" + "═" * (largura_total - 2) + "╝")
+
+
+
+
+
+#menu2
+print(espaco)
+print("\t╔" + "═" * (largura_total - 2) + "╗") 
+print("\t║" + " => Jogar ".center(largura_total - 2,".") + "║")
+print("\t║" + "      1 - Partida simples/indefinida      ".center(largura_total - 2,".") + "║")
+print("\t║" + ".              2 - Melhor de 3             ".center(largura_total - 2,".") + "║")
+print("\t║" + ".              3 - Melhor de 5             ".center(largura_total - 2,".") + "║")
+print("\t║" + "    4 - Personalizar o número de jogos    ".center(largura_total - 2,".") + "║")
+print(pVoltar)
+print("\t╚" + "═" * (largura_total - 2) + "╝")
