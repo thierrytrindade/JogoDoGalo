@@ -211,8 +211,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogado
 
             elif menuTemporario == 2 and opcao == "4":
                 opcao = int(opcao)
-                seriesLength = int(inputVazio("Insira o número de partidas superior a 5: "))
-                return 1, seriesLength
+                return 1, 2
             
 
             elif menuTemporario == 3 and opcao == "1" : opcao="5"; opcao=int(opcao); return opcao
@@ -344,7 +343,8 @@ else:
 
 
 while True:
-    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco,menuTemporario, update, jogador1[0], jogador2[0])
+    opcao, seriesLength = menuJogo(jogador1[3], jogador2[3], empates, espaco, menuTemporario, update, jogador1[0], jogador2[0])
+
 
     # Programa principal
     galo = criaTabuleiro(3, 3, 0)
@@ -366,6 +366,8 @@ while True:
         
         if seriesLength > 1:
             # Calcula o número de vitórias necessárias para vencer a série
+            if seriesLength = 2:
+                seriesLength = int(inputVazio("Insira o número de partidas superior a 5: "))
             winsNeeded = (seriesLength // 2) + 1
             currentWins1 = 0
             currentWins2 = 0
