@@ -366,7 +366,7 @@ while True:
         
         if seriesLength > 1:
             # Calcula o número de vitórias necessárias para vencer a série
-            if seriesLength = 2:
+            if seriesLength == 2:
                 seriesLength = int(inputVazio("Insira o número de partidas superior a 5: "))
             winsNeeded = (seriesLength // 2) + 1
             currentWins1 = 0
