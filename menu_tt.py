@@ -166,13 +166,28 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
                 if contaMenus==5:
                     opção=11
                     return opcao
+        if contaMenus== 9 and Rodadas==2:
+            Verifica=0
+            Rodadas-=1 
+            if temResumo == 0:
+                opcoesValidas = (1, 2, 9)
+            else:
+                opcoesValidas = (1, 2, 7, 8, 9)
+            print(".... JOGO DO GALO ....")
+            print("1 - Jogar")
+            print("2 - Personalizar")
+            if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
+                print(pResumo)
+            print("9 - Sair")
 
 
 
         contaMenus = int(input("Escolha uma opção: "))
-        if contaMenus== 9:
+        if contaMenus== 9 and Rodadas==2:
+            Verifica=0
             Rodadas-=1
         elif contaMenus== 9:
+            Verifica=0
             Rodadas-=1
         elif contaMenus in opcoesValidas and contaMenus!= 9:
             Rodadas+=1
@@ -181,7 +196,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
             print("Entrada inválida! Por favor, insira um número válido.")
 
 
-        
+
 # menuJogoBase
 ## 
 # menuJogoJversosJ
@@ -276,7 +291,7 @@ def menuJogoJversusC(vitorias1, vitorias2, empates,espaco):
 
 
 
-            
+
 def verificaVencedor(tabuleiro, simbolo):
     # Verifica linhas e colunas
     for i in range(3):
