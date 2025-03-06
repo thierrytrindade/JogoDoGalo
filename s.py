@@ -27,8 +27,7 @@ PSair = "12 - Sair"
 PVoltar ="11 - Voltar ao menu anterior"
 update=""
 inputCores = "0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CIANO\n5 - ROXO\n6 - VERDE\n7 - VERMELHO\nEnumere a cor que deseja utilizar para os seus símbolos: "
-
-
+menuTemporario=1
 
 def inputVazio(mensagem):
     while True:
@@ -38,7 +37,22 @@ def inputVazio(mensagem):
         else:
             return valor
 
+        
+""" def inputValidar(mensagem, opcoesValidas, espaco):
+    while True:
+        valor = input(mensagem)
+        if valor in opcoesValidas:
+            print(espaco)
+            return valor
+        print("Entrada inválida! Por favor, insira um valor válido.") """
 
+def inicializaJogadores():
+    return [
+        ["Jogador 1", "X", PREDEFENIDO, 0],
+        ["Jogador 2", "O", PREDEFENIDO, 0]
+    ]
+
+jogador1, jogador2 = inicializaJogadores()
 
 def resumo(nome1, nome2, vitorias1, vitorias2, empates):
     numeroDeJogos = vitorias1 + vitorias2 + empates
@@ -93,13 +107,14 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
             print(pResumo)
         print(PSair)
 
-        opcao = int(input("Escolha uma opção: "))
+        opcao = input("Escolha uma opção: ")
 
         if opcao not in opcoesValidas:
             print(espaco)
             print("Entrada inválida! Por favor, insira um número válido.")
             """ continue """
-        else : 
+        else :
+            opcao=int(opcao) #em vez de meter no input meto aqui, assim consigo fazer a verificação de se o valor introduzido no codigo é simplesmente um enter ou nao, pois metendo in(input(...)) caso que a pessoa simplesmente fizesse enter dava logo erro fechando o programa e a ideia é podermos verificar e permitir ao utilizador de retificar os seus erros sem ter que ter que andar sempre a abrir o programa de novo apos um erro e assim nao tendo que voltar a fazer tudo o que ja tinha feito antes e que foi perdido pelo programa se fechar
             return opcao
 
 
@@ -108,7 +123,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
 
 
 
-menuTemporario=1
+
 def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogador1, jogador2):
     pResumo ="7 - Ver resumo\n8 - Limpar os dados"
     pSair = "9 - Sair"
@@ -287,9 +302,11 @@ def jogo(galo, sJ1, sJ2, espaco):###############################################
     return None #returna nada para prevenir erros(é uma proteção do código)
 
 # Definir variáveis de estatísticas fora do loop principal
-jogador1 = ["Jogador 1", "X", "", 0]
+jogador1 = ["Jogador 1", "X", PREDEFENIDO, 0]
 
-jogador2 = ["Jogador 2", "O", "", 0]
+jogador2 = ["Jogador 2", "O" if jogador1[1] == "X" else "X", PREDEFENIDO, 0]
+
+
 empates = 0
 
 # A RETIFICAR DEPOIS !
@@ -375,12 +392,7 @@ while True:
 
         print(espaco)# Turna o jogo mais "limpo"
         print("Os dados foram todos colocados com os valores padroes de inicio.")
-        jogador1[0]="Jogador 1"
-        jogador1[1]="X"
-        jogador1[3]=0
-        jogador2[0] = "Jogador 2"
-        jogador2[1] = "O" if jogador1[1] == "X" else "X"
-        jogador2[3] = 0
+        jogador1, jogador2 = inicializaJogadores()
      
 
 
