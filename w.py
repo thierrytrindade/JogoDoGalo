@@ -311,7 +311,7 @@ def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2):###########################
                 nomeFormatado = vencedor
                 simboloFormatado = simbolo
 
-            print(" -- Venceu o jogador:", nomeFormatado, "que jogou com o símbolo", simboloFormatado)
+            print("\n=> Venceu o jogador:", nomeFormatado, "que jogou com o símbolo", simboloFormatado)
             return simbolo
         elif verificaEmpate(galo):
             mostraTabuleiro(galo, 3, 3)
@@ -392,11 +392,11 @@ while True:
                 if resultado == jogador1[1]:
                     jogador1[3] += 1
                     currentWins1 += 1
-                    print(f"{jogador1[0]} venceu a partida!")
+                    #print(f"{jogador1[0]} venceu a partida!")
                 elif resultado == jogador2[1]:
                     jogador2[3] += 1
                     currentWins2 += 1
-                    print(f"{jogador2[0]} venceu a partida!")
+                    #print(f"{jogador2[0]} venceu a partida!")
                 elif resultado == "empate":
                     empates += 1
                     print("Empate nesta partida!")
@@ -418,7 +418,12 @@ while True:
             
             # Chama a função resumo para exibir as estatísticas finais
             resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
-            # Redireciona automaticamente para o menu de "Jogar" (menuTemporario == 2)
+            # Reset dos resultados de ambos os jogadores e empates
+            jogador1[3] = 0
+            jogador2[3] = 0
+            empates = 0
+
+            # Define o menuTemporario para 2, para que seja exibido o menu de "Jogar"
             menuTemporario = 2
 
         else:
@@ -446,9 +451,17 @@ while True:
                 continuar = inputVazio("Deseja jogar novamente (S/N): ").upper()
                 if continuar != "S":
                     print(espaco)
-                    print(f"{jogador1[0]} tiveram {jogador1[3]} vitória(s) ({(jogador1[3] / numeroDeJogos) * 100:.2f}%)")
-                    print(f"{jogador2[0]} tiveram {jogador2[3]} vitória(s) ({(jogador2[3] / numeroDeJogos) * 100:.2f}%)")
-                    print(f"Empates: {empates} ({(empates / numeroDeJogos) * 100:.2f}%)")
+                    """ print(f"{jogador1[0]} tiveram {jogador1[3]} vitória(s) ({(jogador1[3] / numeroDeJogos) * 100:.2f}%)")
+                    print(f"{jogador2[0]} tiveram {jogador2[3]} vitória(s) ({(jogador2[3] / numeroDeJogos) * 100:.2f}%)") """
+                    
+                    resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
+                    #print(f"Empates: {empates} ({(empates / numeroDeJogos) * 100:.2f}%)")# Reset dos resultados de ambos os jogadores e empates
+                    jogador1[3] = 0
+                    jogador2[3] = 0
+                    empates = 0
+
+                    # Define o menuTemporario para 2, para que seja exibido o menu de "Jogar"
+                    menuTemporario = 2
                     break
                 else:
                     print(espaco)
