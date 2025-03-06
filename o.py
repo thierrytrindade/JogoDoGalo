@@ -1,30 +1,12 @@
-""" 
-Enumere a cor que deseja utilizar para os seus simbolos
 
-0	 -	PREDEFENIDO
-1	 - 	AMARELO = "\033[1;33m"
-2	 - 	AZUL = "\033[1;34m"
-3	 - 	BRANCO = "\033[1;37m"
-4	 - 	CASTANHO = "\033[0;33m"
-5	 - 	CIANO = "\033[0;36m"
-6	 - 	CINZENTO = "\033[1;30m"
-7	 - 	PRETO = "\033[0;30m"
-8	 - 	ROXO = "\033[1;35m"
-9	 - 	VERDE = "\033[1;32m"
-10	 - 	VERMELHO = "\033[1;31m"
-END = "\033[0m"  #Anula a formatação anterior
- """
-PREDEFENIDO = 0
-AMARELO = "\033[1;33m"
-AZUL = "\033[1;34m"
-BRANCO = "\033[1;37m"
-CASTANHO = "\033[0;33m"
-CIANO = "\033[0;36m"
-CINZENTO = "\033[1;30m"
-PRETO = "\033[0;30m"
-ROXO = "\033[1;35m"
-VERDE = "\033[1;32m"
-VERMELHO = "\033[1;31m"
+PREDEFENIDO = ""
+AMARELO = "\033[1;33m"   
+AZUL = "\033[1;34m"      
+BRANCO = "\033[1;37m"    
+CIANO = "\033[0;36m"     
+ROXO = "\033[1;35m"      
+VERDE = "\033[1;32m"     
+VERMELHO = "\033[1;31m"  
 END = "\033[0m"  #Anula a formatação anterior
 
 ############# ERROS
@@ -39,12 +21,12 @@ END = "\033[0m"  #Anula a formatação anterior
 #Funções e seus significados
 #continue - serve para recomeçar um while
 opcao = 0
-espaco = "\n"*100
+espaco = "\n"*3
 pResumo ="9 - Ver resumo\n10 - Limpar os dados"
 PSair = "12 - Sair"
 PVoltar ="11 - Voltar ao menu anterior"
 update=""
-
+inputCores = "0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CIANO\n5 - ROXO\n6 - VERDE\n7 - VERMELHO\nEnumere a cor que deseja utilizar para os seus símbolos: "
 
 
 
@@ -89,7 +71,6 @@ def mostraTabuleiro(tabuleiro, linha, coluna):
 
 
 
-
 def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
     temResumo = vitorias1 + vitorias2 + empates
     print(espaco)
@@ -119,25 +100,16 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,pResumo,PSair):
 
 
 
-        
-# menuJogoBase
-## 
-# menuJogoJversosJ
-# menuJogoJversosC
-
-
 
 
 menuTemporario=1
-def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
+def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update, jogador1, jogador2):
     pResumo ="7 - Ver resumo\n8 - Limpar os dados"
     pSair = "9 - Sair"
     pVoltar ="9 - Voltar ao menu anterior"
     
     temResumo = vitorias1 + vitorias2 + empates
     print(espaco)
-    opcaoValidaEscolhida = 0
-    opcoesMenuAvancado = (3, 4, 5)
 
     while True:
         if menuTemporario==1:
@@ -145,6 +117,8 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
                 opcoesValidas = (1, 2, 9)
             else:
                 opcoesValidas = (1, 2, 9) + (7, 8)
+                
+            print(espaco)
             print(".... JOGO DO GALO ....")
             print("1 - Jogar")
             print("2 - Personalizar")
@@ -157,6 +131,8 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
                 opcoesValidas = (1, 2, 3, 4, 9)
             else:
                 opcoesValidas = (1, 2, 3, 4, 9) + (7, 8)
+                
+            print(espaco)
             print(".... => Jogar ....")
             print("1 - Partida simples/indefenida (VER ERROS ORTHOGRAFICOS !)\n2 - Maior de 3\n3 - Maior de 5\n Parsonalizar o número de jogos")
             if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
@@ -168,18 +144,23 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
                 opcoesValidas = (1, 2, 3, 4, 5, 9)
             else:
                 opcoesValidas = (1, 2, 3, 4, 5, 9) + (7, 8)
+                
+            print(espaco)
             print(update)
             print(".... => Personalizar ....")
-            print("1 - Mudar nome Jogador1")
-            print("2 - Mudar cor Jogador1")
-            print("3 - Mudar nome Jogador2")
-            print("4 - Mudar cor Jogador2")
+            print("1 - Mudar nome do(a) " + jogador1)
+            print("2 - Mudar cor do(a) " + jogador1)
+            print("3 - Mudar nome do(a) " + jogador2)
+            print("4 - Mudar cor do(a) " + jogador2)
             print("5 - Mudar Simbolo")
             if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
                 print(pResumo)
             print(pVoltar)
 
         opcao = int(input("Escolha uma opção: "))
+        while opcao == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            opcao = input("Escolha uma opção: ")
 
         if opcao not in opcoesValidas:
             print(espaco)
@@ -200,6 +181,15 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
             #elif opcao == 9 and menuTemporario == 2 : menuTemporario = 1
             
 
+            elif menuTemporario == 2 and opcao == 1 : return opcao
+
+            elif menuTemporario == 2 and opcao == 2 : return opcao
+
+            elif menuTemporario == 2 and opcao == 3 : return opcao
+
+            elif menuTemporario == 2 and opcao == 4 : return opcao
+            
+
             elif menuTemporario == 3 and opcao == 1 : opcao=5; return opcao
 
             elif menuTemporario == 3 and opcao == 2 : opcao=6; return opcao
@@ -211,73 +201,6 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario, update):
             elif menuTemporario == 3 and opcao == 5 : opcao=12; return opcao
             
             #elif menuTemporario == 3 and opcao == 9 : menuTemporario = 1
-
-
-
-
-""" 
-        Partida simples/indefinida
-        #permitindo assim os jogadores jogarem quantas partidas quiserem sem haver nececidade de defenirem um numero previo de jogos visto que no fim de cada jogo terem a opção de poderem continuar a jogar.
-        Melhor de 3
-        Melhor de 5
-        Personalizar o numero de jogos
-
-
-        if temResumo > 0: # permite ter um menu dinamico fazendo com que o menu mude automaticamente caso tenha havido ou nao partida concluida
-            print("7 - Ver resumo")
-            print("8 - Limpar os dados")
-        print("9 - Voltar ao menu anterior")
-
- """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -298,7 +221,7 @@ def verificaEmpate(tabuleiro):
             return False  # Ainda há jogadas disponíveis
     return True  # Tabuleiro cheio, é empate
 
-def jogo(galo, sJ1, sJ2, espaco):
+def jogo(galo, sJ1, sJ2, espaco):##########################################################################################################################################
     for i in range(9):
         mostraTabuleiro(galo, 3, 3)
         # Alterna entre os jogadores
@@ -347,9 +270,9 @@ def jogo(galo, sJ1, sJ2, espaco):
     return None #returna nada para prevenir erros(é uma proteção do código)
 
 # Definir variáveis de estatísticas fora do loop principal
-jogador1 = ["Jogador 1", "X", "cor", 0]
+jogador1 = ["Jogador 1", "X", "", 0]
 
-jogador2 = ["Jogador 2", "O", "cor", 0]
+jogador2 = ["Jogador 2", "O", "", 0]
 empates = 0
 
 # A RETIFICAR DEPOIS !
@@ -363,7 +286,7 @@ else:
 
 
 while True:
-    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco,menuTemporario, update)
+    opcao = menuJogo(jogador1[3], jogador2[3], empates, espaco,menuTemporario, update, jogador1[0], jogador2[0])
 
     # Programa principal
     galo = criaTabuleiro(3, 3, 0)
@@ -373,8 +296,8 @@ while True:
     if opcao == 1: #1.1
         
 
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
+        simboloJ1 = jogador1[2]+jogador1[1]+END
+        simboloJ2 = jogador2[2]+jogador2[1]+END
         # ATÉ AQUI !
 
 
@@ -382,7 +305,7 @@ while True:
             galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
 
             # Realiza uma partida
-            resultado = jogo(galo, simboloJ1, simboloJ2)
+            resultado = jogo(galo, simboloJ1, simboloJ2, espaco)
             # Atualiza estatísticas
             if resultado == simboloJ1:
                 jogador1[3] += 1
@@ -391,20 +314,30 @@ while True:
             elif resultado == "empate":
                 empates += 1
             # Pergunta se deseja continuar jogando
+            numeroDeJogos = jogador1[3]+jogador2[3]+empates
             continuar = input("Deseja jogar novamente (S/N): ").upper()
             if continuar == "N":
+                
+                print(espaco)
+                print(jogador1[0], "têm", jogador1[3], " vitória(s),", (jogador1[3] / (numeroDeJogos)) * 100, "%")
+                print(jogador2[0], "têm", jogador2[3], " vitória(s),", (jogador2[3] / (numeroDeJogos)) * 100, "%")
+                print("Empates:", empates, ",", (empates / numeroDeJogos) * 100, "%") 
                 break
             else: 
                 print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro
-            # Opcional: alterna os símbolos para a próxima partida
-            simboloJ1, simboloJ2 = simboloJ2, simboloJ1
 
 
-    elif opcao == 2: #1.2
+            """ # Opcional: alterna os símbolos para a próxima partida
+            simboloJ1, simboloJ2 = simboloJ2, simboloJ1 """
+            # Em vez de trocar apenas os símbolos, troque os dados completos:
+            jogador1, jogador2 = jogador2, jogador1
+
+
+    if opcao == 2: #1.2
         
 
-        simboloJ1 = jogador1[1]
-        simboloJ2 = jogador2[1]
+        simboloJ1 = jogador1[2]+jogador1[1]+END
+        simboloJ2 = jogador2[2]+jogador2[1]+END
         # ATÉ AQUI !
 
 
@@ -412,7 +345,7 @@ while True:
             galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
 
             # Realiza uma partida
-            resultado = jogo(galo, simboloJ1, simboloJ2)
+            resultado = jogo(galo, simboloJ1, simboloJ2, espaco)
             # Atualiza estatísticas
             if resultado == simboloJ1:
                 jogador1[3] += 1
@@ -421,13 +354,23 @@ while True:
             elif resultado == "empate":
                 empates += 1
             # Pergunta se deseja continuar jogando
+            numeroDeJogos = jogador1[3]+jogador2[3]+empates
             continuar = input("Deseja jogar novamente (S/N): ").upper()
             if continuar == "N":
+                
+                print(espaco)
+                print(jogador1[0], "têm", jogador1[3], " vitória(s),", (jogador1[3] / (numeroDeJogos)) * 100, "%")
+                print(jogador2[0], "têm", jogador2[3], " vitória(s),", (jogador2[3] / (numeroDeJogos)) * 100, "%")
+                print("Empates:", empates, ",", (empates / numeroDeJogos) * 100, "%") 
                 break
             else: 
                 print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro
-            # Opcional: alterna os símbolos para a próxima partida
-            simboloJ1, simboloJ2 = simboloJ2, simboloJ1
+
+
+            """ # Opcional: alterna os símbolos para a próxima partida
+            simboloJ1, simboloJ2 = simboloJ2, simboloJ1 """
+            # Em vez de trocar apenas os símbolos, troque os dados completos:
+            jogador1, jogador2 = jogador2, jogador1
 
     elif opcao == 3: #1.3
         
@@ -490,40 +433,118 @@ while True:
 
 
 
-    elif opcao == 5: #3.1wedsrawq   
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[0]=input("Nome do primeiro jogador: ")
-        update="Personalização efetuada : O nome do jogador 1 é "+jogador1[0]
+    elif opcao == 5:  # 3.1wedsrawq
+    # Dados dos jogadores: [nome, símbolo, vitórias]
+        jogador1[0] = input("Nome do primeiro jogador: ")
+        while jogador1[0] == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            jogador1[0] = input("Nome do primeiro jogador: ")
+        update = "Personalização efetuada : O nome do jogador 1 é " + jogador1[0]
+        menuTemporario = 3
+
+    
+
+    elif opcao == 6:  # 3.2
+        inputCor = int(input(inputCores))
+        while inputCor == "":
+            print("Você não digitou nada! Por favor, insira um valor válido.")
+            inputCor = int(input(inputCores))
+
+            
+        if inputCor == 0 :
+            jogador1[2]=PREDEFENIDO
+            cor="Predefenido"
+        if inputCor == 1 : 
+            jogador1[2]=AMARELO
+            cor="Amarelo"
+        if inputCor == 2 :
+            jogador1[2]=AZUL
+            cor="Azul"
+        if inputCor == 3 :
+            jogador1[2]=BRANCO
+            cor="Branco"
+        if inputCor == 4 :
+            jogador1[2]=CIANO
+            cor="Ciano"
+        if inputCor == 5 :
+            jogador1[2]=ROXO
+            cor="Roxo"
+        if inputCor == 6 :
+            jogador1[2]=VERDE
+            cor="Verde"
+        if inputCor == 7 :
+            jogador1[2]=VERMELHO
+            cor="Vermelho"
+        update = "Personalização efetuada : A cor do(a) "+ jogador1[0]+" é " +jogador1[2]+cor+END
+        menuTemporario = 3
+
+
 
         
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    elif opcao == 10:  # 3.3
+        jogador2[0] = input("Nome do primeiro jogador: ")
+        while jogador2[0] == "":
+            print("Você não digitou nada! Por favor, insira um nome válido.")
+            jogador2[0] = input("Nome do primeiro jogador: ")
+        update = "Personalização efetuada : O nome do jogador 2 é " + jogador2[0]
         menuTemporario = 3
 
+    elif opcao == 11:  # 3.4
+        inputCor = int(input(inputCores))
+        while inputCor == "":
+            print("Você não digitou nada! Por favor, insira um valor válido.")
+            inputCor = int(input(inputCores))
 
-
-    elif opcao == 6: #3.2
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador1[2]=input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus simbolos : ")
-        update="Personalização efetuada : A cor do jogador 1 é "+jogador1[2]
+            
+        if inputCor == 0 :
+            jogador2[2]=PREDEFENIDO
+            cor="Predefenido"
+        if inputCor == 1 : 
+            jogador2[2]=AMARELO
+            cor="Amarelo"
+        if inputCor == 2 :
+            jogador2[2]=AZUL
+            cor="Azul"
+        if inputCor == 3 :
+            jogador2[2]=BRANCO
+            cor="Branco"
+        if inputCor == 4 :
+            jogador2[2]=CIANO
+            cor="Ciano"
+        if inputCor == 5 :
+            jogador2[2]=ROXO
+            cor="Roxo"
+        if inputCor == 6 :
+            jogador2[2]=VERDE
+            cor="Verde"
+        if inputCor == 7 :
+            jogador2[2]=VERMELHO
+            cor="Vermelho"
+        update = "Personalização efetuada : A cor do(a) "+ jogador2[0]+" é " +jogador2[2]+cor+END
         menuTemporario = 3
 
-    elif opcao == 10: #3.3
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador2[0]=input("Nome do primeiro jogador: ")
-        update="Personalização efetuada : O nome do jogador 2 é "+jogador2[0]
-        menuTemporario = 3
-
-    elif opcao == 11: #3.4
-            # Dados dos jogadores: [nome, símbolo, vitórias]
-        jogador2[2]=input("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CASTANHO\n5 - CIANO\n6 - CINZENTO\n7 - PRETO\n8 - ROXO\n9 - VERDE\n10 - VERMELHO\nEnumere a cor que deseja utilizar para os seus simbolos : ")
-        update="Personalização efetuada : A cor do jogador 2 é "+jogador2[2]
-        menuTemporario = 3
-
-    elif opcao == 12: #3.5
-        jogador1[1]=input("Qual símbolo que o "+jogador1[0]+" quer utilizar (X ou O): ").upper()
+    elif opcao == 12:  # 3.5
+        jogador1[1] = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
+        while jogador1[1] == "":
+            print("Você não digitou nada! Por favor, insira um símbolo válido.")
+            jogador1[1] = input("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
         jogador2[1] = "O" if jogador1[1] == "X" else "X"
-        update="Personalização efetuada : "+jogador1[0]+"está neste momento com o simbolo "+jogador1[1]+"e " +jogador2[0]+"está com "+jogador2[1]
+        update = "Personalização efetuada : " + jogador1[0] + " está neste momento com o símbolo " + jogador1[1] + " e " + jogador2[0] + " está com " + jogador2[1]
         menuTemporario = 3
-
         
     elif opcao == 7:
 

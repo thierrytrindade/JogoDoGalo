@@ -133,7 +133,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
             
             elif menuTemporario == 2 and opcao == 2 : menuTemporario = 4
 
-            elif menuTemporario == 2
+            """ elif menuTemporario == 2 # EM COMENTARIO POR CAUSA DE ERROS NO VSCODE
 
             elif menuTemporario == 3
 
@@ -141,7 +141,7 @@ def menuJogo(vitorias1, vitorias2, empates,espaco,menuTemporario):
 
             elif menuTemporario == 5
             
-                return opcao
+                return opcao """
             """ 
         if mmmm = x
                 return opcao """
@@ -462,9 +462,9 @@ def menuJogo(vitorias1, vitorias2, empates,espaco):
             else : 
                 
                 opcoesValidas = (1, 2, 7, 8, 9)
-                if temResumo == 0:
+                """ if temResumo == 0: # EM COMENTARIO POR CAUSA DE ERROS NO VSCOD
                 if opcaoMenu==
-                return opcao
+                return opcao """
 
 
 
