@@ -237,7 +237,7 @@ def verificaEmpate(tabuleiro):
             return False  # Ainda há jogadas disponíveis
     return True  # Tabuleiro cheio, é empate
 
-def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2):##########################################################################################################################################
+def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2):
     for i in range(9):
         mostraTabuleiro(galo, 3, 3)
         # Alterna entre os jogadores
@@ -246,70 +246,49 @@ def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2):###########################
         else:
             simbolo = sJ2
 
-        # Validação da jogada
         print("\nJogador", simbolo)
-        while True:        
-            while True :
+        # Solicita a linha
+        while True:
+            linha = inputVazio("Linha 1..3: ")
+            if linha not in ("1", "2", "3"):
+                print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
+                continue
+            linha = int(linha)
+            break
 
-                
-                linha = inputVazio("Linha 1..3: ")
-                """ linha = input("Linha 1..3: ")
-                if linha == "": # serve para prevenir que o utilizador nao entre um valor vazio
-                    print("Você não digitou nada! Por favor, insira um valor válido.")
-                    continue """
-                if linha != "1" and linha != "2" and linha != "3": # serve para prevenir que o utilizador nao entre um valor nao autorizado
-                    print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
-                    continue
-                linha = int(linha) # serve para converter de string para int, visto que se eu tivesse int(input) nao deixava sequer prevenir o primeiro passo de ver se o campo é vazio e o jogo fechava logo de uma vez
-                break
+        # Solicita a coluna
+        while True:
+            coluna = inputVazio("Coluna 1..3: ")
+            if coluna not in ("1", "2", "3"):
+                print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
+                continue
+            coluna = int(coluna)
+            break
 
-            while True :
-                coluna = inputVazio("Coluna 1..3: ")
-                """ coluna = input("Coluna 1..3: ")
-                if coluna == "":
-                    print("Você não digitou nada! Por favor, insira um valor válido.")
-                    continue """
-                if coluna != "1" and coluna != "2" and coluna != "3":
-                    print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
-                    continue
-                coluna = int(coluna)
-                break
+        print(espaco)  # Limpa a tela com espaços
+        if galo[linha-1][coluna-1] == '_':
+            galo[linha-1][coluna-1] = simbolo
+        else:
+            print("\n------ Posição ocupada, escolha outra!!!\n")
+            mostraTabuleiro(galo, 3, 3)
+            print("\nJogador", simbolo)
+            continue  # Repete a jogada se a posição estiver ocupada
 
-            print(espaco)# Turna o jogo mais "limpo", mostrando só o tabuleiro 
-            if galo[linha-1][coluna-1] == '_':
-                galo[linha-1][coluna-1] = simbolo
-                break     
-            else:
-                print("\n------ Posição ocupada, escolha outra!!!\n") 
-                mostraTabuleiro(galo, 3, 3)
-                print("\nJogador", simbolo)#repito a chamada do jugador, pois como faço 130 linhas para continuar a saber qual o jogador a jogar
-                
         # Verifica se houve vencedor
         if verificaVencedor(galo, simbolo):
             mostraTabuleiro(galo, 3, 3)
-            # Identifica qual jogador venceu
+            # Determina o vencedor com base no símbolo:
             if simbolo == jogador1[1]:
                 vencedor = jogador1[0]
-                cor = jogador1[2]
             else:
                 vencedor = jogador2[0]
-                cor = jogador2[2]
-            
-            # Formata o nome e o símbolo com a cor, se definida
-            if cor:
-                nomeFormatado = cor + vencedor + END
-                simboloFormatado = cor + simbolo + END
-            else:
-                nomeFormatado = vencedor
-                simboloFormatado = simbolo
-
-            print(" -- Venceu o jogador:", nomeFormatado, "que jogou com o símbolo", simboloFormatado)
+            print(" -- Venceu o(a) " + vencedor + ": " + simbolo)
             return simbolo
         elif verificaEmpate(galo):
             mostraTabuleiro(galo, 3, 3)
             print(" -- Empate!")
             return "empate"
-    return None #returna nada para prevenir erros(é uma proteção do código)
+    return None  # Protege contra erros
 
 # Definir variáveis de estatísticas fora do loop principal
 empates = 0
