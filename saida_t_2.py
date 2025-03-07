@@ -50,6 +50,10 @@ largura_total = 60
 pSair = "\t║" +"       9 - Sair       ".center(largura_total - 2)+ "║"
 pVoltar ="\t║" +"        9 - Voltar ao menu anterior       ".center(largura_total - 2)+ "║"
 espaco = "\n"*3
+
+
+
+
 print(espaco)
 print("\t╔" + "═" * (largura_total - 2) + "╗") 
 print("\t║" +(NEGRITO+"JOGO DO GALO"+END).center(largura_total + 6) + "║")
