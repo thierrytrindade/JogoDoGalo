@@ -64,32 +64,66 @@ def inicializaTabuleiro(tabuleiro, linha, coluna, valor):
 
 
 def mostraTabuleiro(tabuleiro, linha, coluna, jogador1, jogador2):
-    # Mostra o tabuleiro na consola com cores para os símbolos dos jogadores
+    # Percorre cada linha do tabuleiro.
+    # 'linha' indica o número total de linhas que o tabuleiro possui.
     for i in range(linha):
+        # Inicializa uma string vazia que armazenará a representação da linha atual.
+        linhaExibicao = ""
+        
+        # Percorre cada coluna da linha atual.
+        # 'coluna' indica o número total de colunas que o tabuleiro possui.
         for j in range(coluna):
+            # Recupera o valor presente na célula atual do tabuleiro (linha i, coluna j).
             celula = tabuleiro[i][j]
-            # Verifica se a célula contém o símbolo de algum jogador e aplica a cor correspondente
-            if celula == jogador1[1]:
-                print(jogador1[2] + celula + END, end=' ')
-            elif celula == jogador2[1]:
-                print(jogador2[2] + celula + END, end=' ')
+            
+            # Verifica se a célula está vazia.
+            # Consideramos a célula vazia se o seu valor for '_' ou um espaço ' '.
+            if celula == '_' or celula == ' ':
+                exibicao = ' '  # Se estiver vazia, exibe apenas um espaço.
             else:
-                print(celula, end=' ')
-        print()
+                # Se a célula não está vazia, verifica se ela contém o símbolo do jogador 1.
+                if celula == jogador1[1]:
+                    # Se for o símbolo do jogador 1, adiciona a cor correspondente (jogador1[2]),
+                    # seguido pelo símbolo e pela sequência de reset de cor (END) para não afetar o restante do texto.
+                    exibicao = jogador1[2] + celula + END
+                # Se não for o símbolo do jogador 1, verifica se é o símbolo do jogador 2.
+                elif celula == jogador2[1]:
+                    # Se for o símbolo do jogador 2, aplica a cor do jogador 2 (jogador2[2])
+                    # seguida do símbolo e do reset de cor (END).
+                    exibicao = jogador2[2] + celula + END
+                else:
+                    # Se a célula contém outro valor, apenas utiliza esse valor sem formatação adicional.
+                    exibicao = celula
+            
+            # Adiciona à string da linha a célula formatada.
+            # Coloca um espaço antes e depois do conteúdo para melhorar a visualização.
+            linhaExibicao += f" {exibicao} "
+            
+            # Se não for a última coluna da linha, adiciona o separador vertical '|'
+            if j < coluna - 1:
+                linhaExibicao += "|"
+        
+        # Após montar a string completa da linha, imprime-a na tela.
+        print(linhaExibicao)
+        
+        # Se não for a última linha do tabuleiro, imprime uma linha divisória.
+        # Essa linha divisória ajuda a separar visualmente as linhas do tabuleiro.
+        if i < linha - 1:
+            print("---+---+---")
 
 
 #em vez de meter no input meto aqui, assim consigo fazer a verificação de se o valor introduzido no codigo é simplesmente um enter ou nao, pois metendo in(input(...)) caso que a pessoa simplesmente fizesse enter dava logo erro fechando o programa e a ideia é podermos verificar e permitir ao utilizador de retificar os seus erros sem ter que ter que andar sempre a abrir o programa de novo apos um erro e assim nao tendo que voltar a fazer tudo o que ja tinha feito antes e que foi perdido pelo programa se fechar
 
-def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, jogador1, jogador2, largura_total):
+def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, jogador1, jogador2, larguraTotal):
     # Função para apresentar menus diferentes consoante o estado do jogo (jogar, personalizar, etc.)
 
-    pSair = "\t║" + "       9 - Sair       ".center(largura_total - 2) + "║"
-    pVoltar = "\t║" + "        9 - Voltar ao menu anterior       ".center(largura_total - 2) + "║"
+    pSair = "\t║" + "       9 - Sair       ".center(larguraTotal - 2) + "║"
+    pVoltar = "\t║" + "        9 - Voltar ao menu anterior       ".center(larguraTotal - 2) + "║"
 
     AMARELO = "\033[1;33m"  
     END = "\033[0m"
     NEGRITO = "\033[1m"
-    largura_total = 60
+    larguraTotal = 60
 
     print(espaco)
 
@@ -99,26 +133,26 @@ def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, joga
             opcoesValidas = ("1", "2", "9")
                 
             print(espaco)
-            print("\t╔" + "═" * (largura_total - 2) + "╗") 
-            print("\t║" + (NEGRITO+"JOGO DO GALO"+END).center(largura_total + 6) + "║")
-            print("\t║" + "      1 - Jogar       ".center(largura_total - 2) + "║")
-            print("\t║" + "   2 - Personalizar   ".center(largura_total - 2) + "║")
+            print("\t╔" + "═" * (larguraTotal - 2) + "╗") 
+            print("\t║" + (NEGRITO+"JOGO DO GALO"+END).center(larguraTotal + 6) + "║")
+            print("\t║" + "      1 - Jogar       ".center(larguraTotal - 2) + "║")
+            print("\t║" + "   2 - Personalizar   ".center(larguraTotal - 2) + "║")
             print(pSair)
-            print("\t╚" + "═" * (largura_total - 2) + "╝")
+            print("\t╚" + "═" * (larguraTotal - 2) + "╝")
 
         if menuTemporario == 2:
             # Menu para escolher o tipo de partida (simples, melhor de 3, melhor de 5, etc.)
             opcoesValidas = ("1", "2", "3", "4", "9")
                        
             print(espaco)
-            print("\t╔" + "═" * (largura_total - 2) + "╗") 
-            print("\t║" + (NEGRITO+" => Jogar "+END).center(largura_total + 6) + "║")
-            print("\t║" + "      1 - Partida simples/indefinida      ".center(largura_total - 2) + "║")
-            print("\t║" + "              2 - Melhor de 3             ".center(largura_total - 2) + "║")
-            print("\t║" + "              3 - Melhor de 5             ".center(largura_total - 2) + "║")
-            print("\t║" + "    4 - Personalizar o número de jogos    ".center(largura_total - 2) + "║")
+            print("\t╔" + "═" * (larguraTotal - 2) + "╗") 
+            print("\t║" + (NEGRITO+" => Jogar "+END).center(larguraTotal + 6) + "║")
+            print("\t║" + "      1 - Partida simples/indefinida      ".center(larguraTotal - 2) + "║")
+            print("\t║" + "              2 - Melhor de 3             ".center(larguraTotal - 2) + "║")
+            print("\t║" + "              3 - Melhor de 5             ".center(larguraTotal - 2) + "║")
+            print("\t║" + "    4 - Personalizar o número de jogos    ".center(larguraTotal - 2) + "║")
             print(pVoltar)
-            print("\t╚" + "═" * (largura_total - 2) + "╝")
+            print("\t╚" + "═" * (larguraTotal - 2) + "╝")
             
         if menuTemporario == 3:
             # Menu para personalizar as opções (nomes, cores, símbolos)
@@ -126,17 +160,17 @@ def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, joga
                 
             print(espaco)
             if update != "":
-                print("\t " + (">>> " + update + " <<<").center(largura_total + 6))
-            print("\t╔" + "═" * (largura_total - 2) + "╗") 
-            print("\t║" + (NEGRITO+" => Personalizar "+END).center(largura_total + 6) + "║")
-            print("\t║" + ("1 - Mudar nome do(a) " + jogador1).center(largura_total - 2) + "║")
-            print("\t║" + ("2 - Mudar cor do(a) " + jogador1).center(largura_total - 2) + "║")
-            print("\t║" + ("3 - Mudar nome do(a) " + jogador2).center(largura_total - 2) + "║")
-            print("\t║" + ("4 - Mudar cor do(a) " + jogador2).center(largura_total - 2) + "║")
-            print("\t║" + "5 - Mudar Simbolo de jogo".center(largura_total - 2) + "║")
-            print("\t║" + "6 - Mudar Simbolo para desistir".center(largura_total - 2) + "║")
+                print("\t " + (">>> " + update + " <<<").center(larguraTotal + 6))
+            print("\t╔" + "═" * (larguraTotal - 2) + "╗") 
+            print("\t║" + (NEGRITO+" => Personalizar "+END).center(larguraTotal + 6) + "║")
+            print("\t║" + ("1 - Mudar nome do(a) " + jogador1).center(larguraTotal - 2) + "║")
+            print("\t║" + ("2 - Mudar cor do(a) " + jogador1).center(larguraTotal - 2) + "║")
+            print("\t║" + ("3 - Mudar nome do(a) " + jogador2).center(larguraTotal - 2) + "║")
+            print("\t║" + ("4 - Mudar cor do(a) " + jogador2).center(larguraTotal - 2) + "║")
+            print("\t║" + "5 - Mudar Simbolo de jogo".center(larguraTotal - 2) + "║")
+            print("\t║" + "6 - Mudar Simbolo para desistir".center(larguraTotal - 2) + "║")
             print(pVoltar)
-            print("\t╚" + "═" * (largura_total - 2) + "╝")
+            print("\t╚" + "═" * (larguraTotal - 2) + "╝")
 
         opcao = inputVazio("Escolha uma opção: ")
 
@@ -285,18 +319,18 @@ def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2, desistir):
     return None  # Retorna nada para prevenir erros
 
 # Variáveis de estatísticas e configurações principais (fora do loop do jogo)
-largura_total = 60
+larguraTotal = 60
 empates = 0
 opcao = 0
 espaco = "\n" * 3
-pSair = "\t║" + "       9 - Sair       ".center(largura_total - 2) + "║"
-pVoltar = "\t║" + "        9 - Voltar ao menu anterior       ".center(largura_total - 2) + "║"
+pSair = "\t║" + "       9 - Sair       ".center(larguraTotal - 2) + "║"
+pVoltar = "\t║" + "        9 - Voltar ao menu anterior       ".center(larguraTotal - 2) + "║"
 update = ""
 inputCores = ("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CIANO\n5 - ROXO\n6 - VERDE\n7 - VERMELHO\n"
               "Enumere a cor que deseja utilizar para os seus símbolos: ")
 menuTemporario = 1
 jogador1, jogador2 = inicializaJogadores()
-seriesLength = 0  # Valor default; altera conforme a escolha do utilizador
+opcaoDois = 0  # Valor default; altera conforme a escolha do utilizador
 desistir = "9"
 
 # Garante que os símbolos dos jogadores sejam 'X' e 'O'
@@ -309,8 +343,8 @@ else:
     jogador2[1] = "X"
 
 while True:
-    # Mostra o menu e recebe a opção e o tipo de partida (seriesLength)
-    opcao, seriesLength = menuJogo(jogador1[3], jogador2[3], empates, espaco, menuTemporario, update, jogador1[0], jogador2[0], largura_total)
+    # Mostra o menu e recebe a opção e o tipo de partida (opcaoDois)
+    opcao, opcaoDois = menuJogo(jogador1[3], jogador2[3], empates, espaco, menuTemporario, update, jogador1[0], jogador2[0], larguraTotal)
 
     NEGRITO = "\033[1m"
     # Programa principal: cria e inicializa o tabuleiro
@@ -319,23 +353,23 @@ while True:
 
     # Se a opção for jogar
     if opcao == 1:
-        # Se seriesLength > 1, então é uma série de partidas
-        if seriesLength > 1:
+        # Se opcaoDois > 1, então é uma série de partidas
+        if opcaoDois > 1:
             # Se o utilizador escolheu 2, pede um valor superior a 5 para o número de partidas
-            if seriesLength == 2:
+            if opcaoDois == 2:
                 while True:
-                    seriesLength = int(inputVazio("Insira o número de partidas superior a 5: "))
-                    if seriesLength < 6:  # Previne valores inválidos
+                    opcaoDois = int(inputVazio("Insira o número de partidas superior a 5: "))
+                    if opcaoDois < 6:  # Previne valores inválidos
                         print("Insira um valor superior a 5.")
                         continue
-                    seriesLength = int(seriesLength)
+                    opcaoDois = int(opcaoDois)
                     break
                 
-            winsNeeded = (seriesLength // 2) + 1  # Número de vitórias necessárias para ganhar a série
+            winsNeeded = (opcaoDois // 2) + 1  # Número de vitórias necessárias para ganhar a série
             currentWins1 = 0
             currentWins2 = 0
             
-            print(f"Iniciando série melhor de {seriesLength} (necessário {winsNeeded} vitórias).")
+            print(f"Iniciando série melhor de {opcaoDois} (necessário {winsNeeded} vitórias).")
             
             while currentWins1 < winsNeeded and currentWins2 < winsNeeded:
                 # Limpa o tabuleiro para cada partida
@@ -379,7 +413,7 @@ while True:
             menuTemporario = 2
 
         else:
-            # Modo partida única (seriesLength == 1)
+            # Modo partida única (opcaoDois == 1)
             while True:
                 galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
                 
@@ -516,34 +550,34 @@ while True:
         print(espaco)
 
         # Exibe uma mensagem de despedida e os créditos finais
-        print("\t╔" + "═" * (largura_total - 2) + "╗")
-        print("\t║" + "🚀 O JOGO MAIS ÉPICO DE SEMPRE! 🚀".center(largura_total - 4) + "║")
-        print("\t║" + "🎮  Desenvolvido por TT Games 🎮".center(largura_total - 4) + "║")
-        print("\t╠" + "═" * (largura_total - 2) + "╣")
-        print("\t║" + "🌟 Equipe de Desenvolvimento 2024 / 2025 🌟".center(largura_total - 4) + "║")
-        print("\t╠" + "═" * (largura_total - 2) + "╣")
-        print("\t║" + "Disciplina Aplicações Informaticas B".center(largura_total - 2) + "║")
-        print("\t║" + "Turma 12B".center(largura_total - 2) + "║")
-        print("\t║" + "Thierry 'Chefe Supremo' Trindade".center(largura_total - 2) + "║")
-        print("\t║" + "Santiago 'O' Santos".center(largura_total - 2) + "║")
-        print("\t║" + "Andre 'Ratazana' Madail".center(largura_total - 2) + "║")
-        print("\t╠" + "═" * (largura_total - 2) + "╣")
-        print("\t║" + "🕵️  Testadores".center(largura_total - 1) + "║")
-        print("\t║" + "Professor com paciência infinita".center(largura_total - 2) + "║")
-        print("\t╠" + "═" * (largura_total - 2) + "╣")
-        print("\t║" + "🛠️  Engine & Ferramentas Utilizadas".center(largura_total - 1) + "║")
-        print("\t║" + "Desenvolvido em Python 🐍".center(largura_total - 3) + "║")
-        print("\t║" + "Google & CTRL+C / CTRL+V".center(largura_total - 2) + "║")
-        print("\t╠" + "═" * (largura_total - 2) + "╣")
-        print("\t║" + "🙌  Agradecimentos Especiais".center(largura_total - 3) + "║")
-        print("\t║" + "Google, Wikipedia e tutoriais infinitos".center(largura_total - 2) + "║")
-        print("\t║" + "CTRL+Z, salvando vidas desde sempre".center(largura_total - 2) + "║")
-        print("\t║" + "Impulsionado por café e ansiedade! ☕😖".center(largura_total - 4) + "║")
-        print("\t╠" + "═" * (largura_total - 2) + "╣")
-        print("\t║" + "🎖️    Mensagem Final     ".center(largura_total - 1) + "║")
-        print("\t║" + "\"Obrigado por jogar e aguentar os bugs!\"".center(largura_total - 2) + "║")
-        print("\t║" + "Sair...".center(largura_total - 2) + "║")
-        print("\t╚" + "═" * (largura_total - 2) + "╝")
+        print("\t╔" + "═" * (larguraTotal - 2) + "╗")
+        print("\t║" + "🚀 O JOGO MAIS ÉPICO DE SEMPRE! 🚀".center(larguraTotal - 4) + "║")
+        print("\t║" + "🎮  Desenvolvido por TT Games 🎮".center(larguraTotal - 4) + "║")
+        print("\t╠" + "═" * (larguraTotal - 2) + "╣")
+        print("\t║" + "🌟 Equipe de Desenvolvimento 2024 / 2025 🌟".center(larguraTotal - 4) + "║")
+        print("\t╠" + "═" * (larguraTotal - 2) + "╣")
+        print("\t║" + "Disciplina Aplicações Informaticas B".center(larguraTotal - 2) + "║")
+        print("\t║" + "Turma 12B".center(larguraTotal - 2) + "║")
+        print("\t║" + "Thierry 'Chefe Supremo' Trindade".center(larguraTotal - 2) + "║")
+        print("\t║" + "Santiago Santos".center(larguraTotal - 2) + "║")
+        print("\t║" + "Andre Madail".center(larguraTotal - 2) + "║")
+        print("\t╠" + "═" * (larguraTotal - 2) + "╣")
+        print("\t║" + "🕵️  Testadores".center(larguraTotal - 1) + "║")
+        print("\t║" + "Professor com paciência infinita".center(larguraTotal - 2) + "║")
+        print("\t╠" + "═" * (larguraTotal - 2) + "╣")
+        print("\t║" + "🛠️  Engine & Ferramentas Utilizadas".center(larguraTotal - 1) + "║")
+        print("\t║" + "Desenvolvido em Python 🐍".center(larguraTotal - 3) + "║")
+        print("\t║" + "Google & CTRL+C / CTRL+V".center(larguraTotal - 2) + "║")
+        print("\t╠" + "═" * (larguraTotal - 2) + "╣")
+        print("\t║" + "🙌  Agradecimentos Especiais".center(larguraTotal - 3) + "║")
+        print("\t║" + "Google, Wikipedia e tutoriais infinitos".center(larguraTotal - 2) + "║")
+        print("\t║" + "CTRL+Z, salvando vidas desde sempre".center(larguraTotal - 2) + "║")
+        print("\t║" + "Impulsionado por café e ansiedade! ☕😖".center(larguraTotal - 4) + "║")
+        print("\t╠" + "═" * (larguraTotal - 2) + "╣")
+        print("\t║" + "🎖️    Mensagem Final     ".center(larguraTotal - 1) + "║")
+        print("\t║" + "\"Obrigado por jogar e aguentar os bugs!\"".center(larguraTotal - 2) + "║")
+        print("\t║" + "Sair...".center(larguraTotal - 2) + "║")
+        print("\t╚" + "═" * (larguraTotal - 2) + "╝")
         # Fim dos créditos e mensagem final
         break
 
