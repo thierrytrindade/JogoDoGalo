@@ -8,8 +8,40 @@ ROXO = "\033[1;35m"
 VERDE = "\033[1;32m"     
 VERMELHO = "\033[1;31m"  
 END = "\033[0m"  # Anula a formatação anterior
+il="\n\t» " # formatacao do inicio de todas as lineas fora do menu
+me="\t║" # formatacao a esquerda do menu
+
+# Define as opções válidas para a escolha de cores de 0 a 7
+opcoesValidasCores = [str(i) for i in range(8)]
 
 
+def mudarCor(jogador, opcoesValidas):
+    # Pede a entrada do usuário e verifica se está entre as opções válidas
+    while True:
+        inputValido = inputVazio(inputCores)
+        if inputValido not in opcoesValidas:
+            print(f"{il}Entrada inválida! Por favor, insira um número válido entre {opcoesValidas[0]} e {opcoesValidas[-1]}.")
+        else:
+            break
+
+    inputCor = int(inputValido)
+
+    # Dicionário que mapeia as opções para (código da cor, nome da cor)
+    cores = {
+        0: (PREDEFENIDO, "Predefenido"),
+        1: (AMARELO, "Amarelo"),
+        2: (AZUL, "Azul"),
+        3: (BRANCO, "Branco"),
+        4: (CIANO, "Ciano"),
+        5: (ROXO, "Roxo"),
+        6: (VERDE, "Verde"),
+        7: (VERMELHO, "Vermelho")
+    }
+    
+    # Atualiza a cor do jogador de acordo com a escolha
+    jogador[2], nomeCor = cores[inputCor]
+    update = f"{il}Personalização efetuada : A cor do(a) {jogador[0]} é {jogador[2] + nomeCor + END}"
+    return update
 
 # Jogo do Galo
 # Rotinas
@@ -18,11 +50,12 @@ END = "\033[0m"  # Anula a formatação anterior
 # 'continue' - serve para recomeçar um while
 
 def inputVazio(mensagem):
+    
     # Função que pede input e não permite que o utilizador deixe a entrada vazia
     while True:
-        valor = input(mensagem)
+        valor = input(il+mensagem)
         if valor == "":
-            print("Você não digitou nada! Por favor, insira um valor válido.")
+            print(f"{il}Você não digitou nada! Por favor, insira um valor válido.")
         else:
             return valor
 
@@ -35,15 +68,16 @@ def inicializaJogadores():
     ]
 
 def resumo(nome1, nome2, vitorias1, vitorias2, empates):
+    
     # Função para apresentar o resumo dos jogos (vitórias e empates)
     numeroDeJogos = vitorias1 + vitorias2 + empates
-    print("\n--- Resumo de", numeroDeJogos, "Jogo(s) ---")
+    print(f"{il}--- Resumo de", numeroDeJogos, "Jogo(s) ---")
     if numeroDeJogos > 0:
-        print(nome1, "têm", vitorias1, " vitória(s),", (vitorias1 / numeroDeJogos) * 100, "%")
-        print(nome2, "têm", vitorias2, " vitória(s),", (vitorias2 / numeroDeJogos) * 100, "%")
-        print("Empates:", empates, ",", (empates / numeroDeJogos) * 100, "%")    
+        print(f"{il}{nome1} têm {vitorias1} vitória(s), {(vitorias1 / numeroDeJogos) * 100} %")
+        print(f"{il}{nome2} têm {vitorias2} vitória(s), {(vitorias2 / numeroDeJogos) * 100} %")
+        print(f"{il}Empates:", empates, ",", (empates / numeroDeJogos) * 100, "%")    
     else:
-        print("Nenhuma partida foi concluída!")
+        print(f"{il}Nenhuma partida foi concluída!")
 
 def criaTabuleiro(linha, coluna, valor):
     # Cria uma matriz (lista de listas) que representa o tabuleiro
@@ -66,6 +100,7 @@ def inicializaTabuleiro(tabuleiro, linha, coluna, valor):
 def mostraTabuleiro(tabuleiro, linha, coluna, jogador1, jogador2):
     # Percorre cada linha do tabuleiro.
     # 'linha' indica o número total de linhas que o tabuleiro possui.
+    print()# para iniciar com um espacamento de uma linha entre a opcao e o jogo
     for i in range(linha):
         # Inicializa uma string vazia que armazenará a representação da linha atual.
         linhaExibicao = ""
@@ -77,8 +112,7 @@ def mostraTabuleiro(tabuleiro, linha, coluna, jogador1, jogador2):
             simboloMomento = tabuleiro[i][j]
             
             # Verifica se a célula está vazia.
-            # Consideramos a célula vazia se o seu valor for '_' ou um espaço ' '.
-            if simboloMomento == '_' or simboloMomento == ' ':
+            if simboloMomento == ' ':
                 exibicao = ' '  # Se estiver vazia, exibe apenas um espaço.
             else:
                 # Se a célula não está vazia, verifica se ela contém o símbolo do jogador 1.
@@ -91,9 +125,9 @@ def mostraTabuleiro(tabuleiro, linha, coluna, jogador1, jogador2):
                     # Se for o símbolo do jogador 2, aplica a cor do jogador 2 (jogador2[2])
                     # seguida do símbolo e do reset de cor (END).
                     exibicao = jogador2[2] + simboloMomento + END
-                """ else:
+                else:
                     # Se a célula contém outro valor, apenas utiliza esse valor sem formatação adicional.
-                    exibicao = simboloMomento """
+                    exibicao = simboloMomento
             
             # Adiciona à string da linha a célula formatada.
             # Coloca um espaço antes e depois do conteúdo para melhorar a visualização.
@@ -104,23 +138,23 @@ def mostraTabuleiro(tabuleiro, linha, coluna, jogador1, jogador2):
                 linhaExibicao += "|"
         
         # Após montar a string completa da linha, imprime-a na tela.
-        print(linhaExibicao)
+        print("\t\t\t\t"+linhaExibicao)
         
         # Se não for a última linha do tabuleiro, imprime uma linha divisória.
         # Essa linha divisória ajuda a separar visualmente as linhas do tabuleiro.
         if i < linha - 1:
-            print("---+---+---")
+            print("\t\t\t\t"+"---+---+---")
 
 
 #em vez de meter no input meto aqui, assim consigo fazer a verificação de se o valor introduzido no codigo é simplesmente um enter ou nao, pois metendo in(input(...)) caso que a pessoa simplesmente fizesse enter dava logo erro fechando o programa e a ideia é podermos verificar e permitir ao utilizador de retificar os seus erros sem ter que ter que andar sempre a abrir o programa de novo apos um erro e assim nao tendo que voltar a fazer tudo o que ja tinha feito antes e que foi perdido pelo programa se fechar
 
 def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, jogador1, jogador2, larguraTotal):
+    
     # Função para apresentar menus diferentes consoante o estado do jogo (jogar, personalizar, etc.)
 
-    pSair = "\t║" + "       9 - Sair       ".center(larguraTotal - 2) + "║"
-    pVoltar = "\t║" + "        9 - Voltar ao menu anterior       ".center(larguraTotal - 2) + "║"
-
-    AMARELO = "\033[1;33m"  
+    pSair = f"{me}{'       9 - Sair       '.center(larguraTotal - 2)}║"
+    pVoltar = f"{me}{'        9 - Voltar ao menu anterior       '.center(larguraTotal - 2)}║"
+ 
     END = "\033[0m"
     NEGRITO = "\033[1m"
     larguraTotal = 60
@@ -134,9 +168,9 @@ def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, joga
                 
             print(espaco)
             print("\t╔" + "═" * (larguraTotal - 2) + "╗") 
-            print("\t║" + (NEGRITO+"JOGO DO GALO"+END).center(larguraTotal + 6) + "║")
-            print("\t║" + "      1 - Jogar       ".center(larguraTotal - 2) + "║")
-            print("\t║" + "   2 - Personalizar   ".center(larguraTotal - 2) + "║")
+            print(f"\t║{(NEGRITO + 'JOGO DO GALO' + END).center(larguraTotal + 6)}║")#print("\t║" + (NEGRITO+"JOGO DO GALO"+END).center(larguraTotal + 6) + "║")
+            print(f"{me}{'      1 - Jogar       '.center(larguraTotal - 2)}║")
+            print(f"{me}{'   2 - Personalizar   '.center(larguraTotal - 2)}║")
             print(pSair)
             print("\t╚" + "═" * (larguraTotal - 2) + "╝")
 
@@ -146,11 +180,11 @@ def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, joga
                        
             print(espaco)
             print("\t╔" + "═" * (larguraTotal - 2) + "╗") 
-            print("\t║" + (NEGRITO+" => Jogar "+END).center(larguraTotal + 6) + "║")
-            print("\t║" + "      1 - Partida simples/indefinida      ".center(larguraTotal - 2) + "║")
-            print("\t║" + "              2 - Melhor de 3             ".center(larguraTotal - 2) + "║")
-            print("\t║" + "              3 - Melhor de 5             ".center(larguraTotal - 2) + "║")
-            print("\t║" + "    4 - Personalizar o número de jogos    ".center(larguraTotal - 2) + "║")
+            print(f"{me}{(NEGRITO+" => Jogar "+END).center(larguraTotal + 6)}║")
+            print(f"{me}{'      1 - Partida simples/indefinida      '.center(larguraTotal - 2)}║")
+            print(f"{me}{'              2 - Melhor de 3             '.center(larguraTotal - 2)}║")
+            print(f"{me}{'              3 - Melhor de 5             '.center(larguraTotal - 2)}║")
+            print(f"{me}{'    4 - Personalizar o número de jogos    '.center(larguraTotal - 2)}║")
             print(pVoltar)
             print("\t╚" + "═" * (larguraTotal - 2) + "╝")
             
@@ -162,21 +196,21 @@ def menuJogo(vitorias1, vitorias2, empates, espaco, menuTemporario, update, joga
             if update != "":
                 print("\t " + (">>> " + update + " <<<").center(larguraTotal + 6))
             print("\t╔" + "═" * (larguraTotal - 2) + "╗") 
-            print("\t║" + (NEGRITO+" => Personalizar "+END).center(larguraTotal + 6) + "║")
-            print("\t║" + ("1 - Mudar nome do(a) " + jogador1).center(larguraTotal - 2) + "║")
-            print("\t║" + ("2 - Mudar cor do(a) " + jogador1).center(larguraTotal - 2) + "║")
-            print("\t║" + ("3 - Mudar nome do(a) " + jogador2).center(larguraTotal - 2) + "║")
-            print("\t║" + ("4 - Mudar cor do(a) " + jogador2).center(larguraTotal - 2) + "║")
-            print("\t║" + "5 - Mudar Simbolo de jogo".center(larguraTotal - 2) + "║")
-            print("\t║" + "6 - Mudar Simbolo para desistir".center(larguraTotal - 2) + "║")
+            print(f"{me}{(NEGRITO+" => Personalizar "+END).center(larguraTotal + 6)}║")
+            print(f"{me}{('1 - Mudar nome do(a) ' + jogador1).center(larguraTotal - 2)}║")
+            print(f"{me}{('2 - Mudar cor do(a) ' + jogador1).center(larguraTotal - 2)}║")
+            print(f"{me}{('3 - Mudar nome do(a) ' + jogador2).center(larguraTotal - 2)}║")
+            print(f"{me}{('4 - Mudar cor do(a) ' + jogador2).center(larguraTotal - 2)}║")
+            print(f"{me}{'5 - Mudar Simbolo de jogo'.center(larguraTotal - 2)}║")
+            print(f"{me}{'6 - Mudar Simbolo para desistir'.center(larguraTotal - 2)}║")
             print(pVoltar)
             print("\t╚" + "═" * (larguraTotal - 2) + "╝")
 
-        opcao = inputVazio("Escolha uma opção: ")
+        opcao = inputVazio(f"Escolha uma opção: ")
 
         if opcao not in opcoesValidas:
             print(espaco)
-            print("Entrada inválida! Por favor, insira um número válido.")
+            print(f"{il}Entrada inválida! Por favor, insira um número válido.")
         else: 
             # Verifica a opção escolhida e ajusta o menu conforme necessário
             if opcao == "9" and menuTemporario != 1:
@@ -239,11 +273,12 @@ def verificaVencedor(tabuleiro, simbolo):
 def verificaEmpate(tabuleiro):
     # Verifica se ainda há jogadas disponíveis (células vazias representadas por '_')
     for linha in tabuleiro:
-        if '_' in linha:
+        if ' ' in linha:
             return False  # Ainda há jogadas disponíveis
     return True  # Tabuleiro cheio, é empate
 
 def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2, desistir):
+    
     # Função principal que gere o jogo (jogadas, verificação de vitória ou empate)
     VERMELHO = "\033[1;31m"
     VERDE = "\033[1;32m"  
@@ -261,35 +296,35 @@ def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2, desistir):
             oponente = jogador1
 
         # Validação da jogada
-        print("\nJogador", turno[0], "(", simbolo, ")")
+        print(f"{il}Jogador {turno[0]} ({simbolo})")
         while True:        
             while True:
-                linha = inputVazio("Linha 1..3 (ou desistir): ")
+                linha = inputVazio(f"Linha 1..3 (ou desistir): ")
                 if linha == desistir:
-                    print(f"\n=> {turno[0]} {VERMELHO}desistiu!{END} {oponente[0]} {VERDE}vence por desistência!{END}")
+                    print(f"{il} {turno[0]} {VERMELHO}desistiu!{END} {oponente[0]} {VERDE}vence por desistência!{END}")
                     return oponente[1]  # Retorna o símbolo do oponente como vencedor
                 if linha != "1" and linha != "2" and linha != "3":  # Previne valores inválidos
-                    print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
+                    print(f"{il}Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
                     continue
                 linha = int(linha)  # Converte para inteiro
                 break
 
             while True:
-                coluna = inputVazio("Coluna 1..3: ")
+                coluna = inputVazio(f"Coluna 1..3: ")
                 if coluna != "1" and coluna != "2" and coluna != "3":
-                    print("Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
+                    print(f"{il}Coordenadas inválidas! Por favor, insira valores entre 1 e 3.")
                     continue
                 coluna = int(coluna)
                 break
 
             print(espaco)  # Limpa o ecrã com linhas em branco
-            if galo[linha-1][coluna-1] == '_':
+            if galo[linha-1][coluna-1] == ' ':
                 galo[linha-1][coluna-1] = simbolo  # Marca a jogada
                 break     
             else:
-                print("\n------ Posição ocupada, escolha outra!!!\n") 
+                print(f"{il}------ Posição ocupada, escolha outra!!!\n") 
                 mostraTabuleiro(galo, 3, 3, jogador1, jogador2)
-                print("\nJogador", simbolo)  # Repete a indicação do jogador
+                print(f"{il}Jogador", simbolo)  # Repete a indicação do jogador
 
         # Verifica se houve vencedor após a jogada
         if verificaVencedor(galo, simbolo):
@@ -310,11 +345,11 @@ def jogo(galo, sJ1, sJ2, espaco, jogador1, jogador2, desistir):
                 nomeFormatado = vencedor
                 simboloFormatado = simbolo
 
-            print("\n=> Venceu o jogador:", nomeFormatado, "que jogou com o símbolo", simboloFormatado)
+            print(f"{il} Venceu o jogador:{nomeFormatado}que jogou com o símbolo{simboloFormatado}")
             return simbolo
         elif verificaEmpate(galo):
             mostraTabuleiro(galo, 3, 3, jogador1, jogador2)
-            print(" -- Empate!")
+            print(f"{il} -- Empate!")
             return "empate"
     return None  # Retorna nada para prevenir erros
 
@@ -323,11 +358,10 @@ larguraTotal = 60
 empates = 0
 opcao = 0
 espaco = "\n" * 3
-pSair = "\t║" + "       9 - Sair       ".center(larguraTotal - 2) + "║"
-pVoltar = "\t║" + "        9 - Voltar ao menu anterior       ".center(larguraTotal - 2) + "║"
+pSair = "\t║" + "       9 - Sair       '.center(larguraTotal - 2)║"
+pVoltar = "\t║" + "        9 - Voltar ao menu anterior       '.center(larguraTotal - 2)║"
 update = ""
-inputCores = ("0 - PREDEFENIDO\n1 - AMARELO\n2 - AZUL\n3 - BRANCO\n4 - CIANO\n5 - ROXO\n6 - VERDE\n7 - VERMELHO\n"
-              "Enumere a cor que deseja utilizar para os seus símbolos: ")
+inputCores = (f"{il}0 - PREDEFENIDO{il}1 - AMARELO{il}2 - AZUL{il}3 - BRANCO{il}4 - CIANO{il}5 - ROXO{il}6 - VERDE{il}7 - VERMELHO{il}Enumere a cor que deseja utilizar para os seus símbolos: ")
 menuTemporario = 1
 jogador1, jogador2 = inicializaJogadores()
 opcaoDois = 0  # Valor default; altera conforme a escolha do utilizador
@@ -358,9 +392,9 @@ while True:
             # Se o utilizador escolheu 2, pede um valor superior a 5 para o número de partidas
             if opcaoDois == 2:
                 while True:
-                    opcaoDois = int(inputVazio("Insira o número de partidas superior a 5: "))
+                    opcaoDois = int(inputVazio(f"Insira o número de partidas superior a 5: "))
                     if opcaoDois < 6:  # Previne valores inválidos
-                        print("Insira um valor superior a 5.")
+                        print(f"{il}Insira um valor superior a 5.")
                         continue
                     opcaoDois = int(opcaoDois)
                     break
@@ -369,11 +403,11 @@ while True:
             currentWins1 = 0
             currentWins2 = 0
             
-            print(f"Iniciando série melhor de {opcaoDois} (necessário {winsNeeded} vitórias).")
+            print(f"{il}Iniciando série melhor de {opcaoDois} (necessário {winsNeeded} vitórias).")
             
             while currentWins1 < winsNeeded and currentWins2 < winsNeeded:
                 # Limpa o tabuleiro para cada partida
-                galo = inicializaTabuleiro(galo, 3, 3, '_')
+                galo = inicializaTabuleiro(galo, 3, 3, ' ')
                 
                 # Executa uma partida
                 resultado = jogo(galo, jogador1[1], jogador2[1], espaco, jogador1, jogador2, desistir)
@@ -387,7 +421,7 @@ while True:
                     currentWins2 += 1
                 elif resultado == "empate":
                     empates += 1
-                    print("Empate nesta partida!")
+                    print(f"{il}Empate nesta partida!")
 
                 # Se não houve empate, inverte a ordem para que o perdedor comece o próximo jogo
                 if resultado != "empate":
@@ -398,9 +432,9 @@ while True:
             
             # Verifica quem venceu a série e mostra o resultado
             if currentWins1 == winsNeeded:
-                print(f"\n-- {jogador1[0]} venceu a série!")
+                print(f"{il}-- {jogador1[0]} venceu a série!")
             else:
-                print(f"\n-- {jogador2[0]} venceu a série!")
+                print(f"{il}-- {jogador2[0]} venceu a série!")
             
             # Apresenta o resumo final da série
             resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
@@ -415,7 +449,7 @@ while True:
         else:
             # Modo partida única (opcaoDois == 1)
             while True:
-                galo = inicializaTabuleiro(galo, 3, 3, '_')  # Limpa o tabuleiro
+                galo = inicializaTabuleiro(galo, 3, 3, ' ')  # Limpa o tabuleiro
                 
                 # Executa uma partida única
                 resultado = jogo(galo, jogador1[1], jogador2[1], espaco, jogador1, jogador2, desistir)
@@ -431,10 +465,10 @@ while True:
                 numeroDeJogos = jogador1[3] + jogador2[3] + empates
                 
                 # Mostra o placar atual
-                print(f"\nPlacar atual: {jogador1[0]} - {jogador1[3]} x {jogador2[3]} - {jogador2[0]} | Empates: {empates}")
+                print(f"{il}Placar atual: {jogador1[0]} - {jogador1[3]} x {jogador2[3]} - {jogador2[0]} | Empates: {empates}")
                 
                 # Pergunta se o utilizador quer jogar novamente
-                continuar = inputVazio("Deseja jogar novamente (S/N): ").upper()
+                continuar = inputVazio(f"Deseja jogar novamente (S/N): ").upper()
                 if continuar != "S":
                     print(espaco)
                     resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
@@ -456,135 +490,84 @@ while True:
                         simboloJ2 = jogador2[1]
 
     elif opcao == 2:  # Opção para personalizar (mudar nome do jogador 1)
-        jogador1[0] = inputVazio("Nome do primeiro jogador: ")
-        update = "Personalização efetuada : O nome do jogador 1 é " + jogador1[0]
+        jogador1[0] = inputVazio(f"Nome do primeiro jogador: ")
+        update = f"{il}Personalização efetuada : O nome do jogador 1 é {jogador1[0]}"
         menuTemporario = 3
 
-    elif opcao == 3:  # Opção para mudar a cor do jogador 1
-        inputCor = inputVazio(inputCores)
-        inputCor = int(inputCor)
-        if inputCor == 0:
-            jogador1[2] = PREDEFENIDO
-            cor = "Predefenido"
-        if inputCor == 1: 
-            jogador1[2] = AMARELO
-            cor = "Amarelo"
-        if inputCor == 2:
-            jogador1[2] = AZUL
-            cor = "Azul"
-        if inputCor == 3:
-            jogador1[2] = BRANCO
-            cor = "Branco"
-        if inputCor == 4:
-            jogador1[2] = CIANO
-            cor = "Ciano"
-        if inputCor == 5:
-            jogador1[2] = ROXO
-            cor = "Roxo"
-        if inputCor == 6:
-            jogador1[2] = VERDE
-            cor = "Verde"
-        if inputCor == 7:
-            jogador1[2] = VERMELHO
-            cor = "Vermelho"
-        update = "Personalização efetuada : A cor do(a) " + jogador1[0] + " é " + jogador1[2] + cor + END
-        menuTemporario = 3
+    
 
     elif opcao == 4:  # Opção para mudar o nome do jogador 2
-        jogador2[0] = inputVazio("Nome do primeiro jogador: ")
-        update = "Personalização efetuada : O nome do jogador 2 é " + jogador2[0]
+        jogador2[0] = inputVazio(f"Nome do primeiro jogador: ")
+        update = f"{il}Personalização efetuada : O nome do jogador 2 é " + jogador2[0]
         menuTemporario = 3
 
-    elif opcao == 5:  # Opção para mudar a cor do jogador 2
-        inputCor = inputVazio(inputCores)
-        inputCor = int(inputCor)
-            
-        if inputCor == 0:
-            jogador2[2] = PREDEFENIDO
-            cor = "Predefenido"
-        if inputCor == 1: 
-            jogador2[2] = AMARELO
-            cor = "Amarelo"
-        if inputCor == 2:
-            jogador2[2] = AZUL
-            cor = "Azul"
-        if inputCor == 3:
-            jogador2[2] = BRANCO
-            cor = "Branco"
-        if inputCor == 4:
-            jogador2[2] = CIANO
-            cor = "Ciano"
-        if inputCor == 5:
-            jogador2[2] = ROXO
-            cor = "Roxo"
-        if inputCor == 6:
-            jogador2[2] = VERDE
-            cor = "Verde"
-        if inputCor == 7:
-            jogador2[2] = VERMELHO
-            cor = "Vermelho"
-        update = "Personalização efetuada : A cor do(a) " + jogador2[0] + " é " + jogador2[2] + cor + END
+    elif opcao == 3:  # Mudar a cor do jogador 1
+        update = mudarCor(jogador1, opcoesValidasCores)
         menuTemporario = 3
+
+    elif opcao == 5:  # Mudar a cor do jogador 2
+        update = mudarCor(jogador2, opcoesValidasCores)
+        menuTemporario = 3
+    
 
     elif opcao == 6:  # Opção para mudar o símbolo do jogador 1 (e automaticamente do jogador 2)
         while True:
             opcoesValidas = ("X","O")
-            jogador1[1] = inputVazio("Qual símbolo que o " + jogador1[0] + " quer utilizar (X ou O): ").upper()
+            jogador1[1] = inputVazio(f"Qual símbolo que o {jogador1[0]} quer utilizar (X ou O): ").upper()
             if jogador1[1] not in opcoesValidas:
                 print(espaco)
-                print("Entrada inválida! Por favor, insira um número válido.")
+                print(f"{il}Entrada inválida! Por favor, insira um número válido.")
                 continue
             break
         jogador2[1] = "O" if jogador1[1] == "X" else "X"
-        update = ("Personalização efetuada : " + jogador1[0] + " está neste momento com o símbolo " +
-                jogador1[1] + " e " + jogador2[0] + " está com " + jogador2[1])
+        update = (f"Personalização efetuada : {jogador1[0]} está neste momento com o símbolo {jogador1[1]} e {jogador2[0]} está com {jogador2[1]}")
         menuTemporario = 3
     
     elif opcao == 7:  # Opção para mudar o símbolo de desistência
-        desistir = inputVazio("Qual símbolo que o que deseja usar para desistir : ")
-        update = "Personalização efetuada : o simbolo de desistir foi alterado e agora é " + desistir
+        desistir = inputVazio(f"Qual símbolo que o que deseja usar para desistir : ")
+        update = f"Personalização efetuada : o simbolo de desistir foi alterado e agora é {desistir}"
         menuTemporario = 3
 
     elif opcao == 9:
         # Opção para sair do jogo
         print(espaco)  # Limpa o ecrã com linhas em branco
-        print("A sair do jogo....")
+        print(f"{il}A sair do jogo....")
 
         resumo(jogador1[0], jogador2[0], jogador1[3], jogador2[3], empates)
         print(espaco)
 
         # Exibe uma mensagem de despedida e os créditos finais
         print("\t╔" + "═" * (larguraTotal - 2) + "╗")
-        print("\t║" + "🚀 O JOGO MAIS ÉPICO DE SEMPRE! 🚀".center(larguraTotal - 4) + "║")
-        print("\t║" + "🎮  Desenvolvido por TT Games 🎮".center(larguraTotal - 4) + "║")
+        print(f"{me}{'🚀 O JOGO MAIS ÉPICO DE SEMPRE! 🚀'.center(larguraTotal - 4)}║")
+        print(f"{me}{'🎮  Desenvolvido por TT Games 🎮'.center(larguraTotal - 4)}║")
         print("\t╠" + "═" * (larguraTotal - 2) + "╣")
-        print("\t║" + "🌟 Equipe de Desenvolvimento 2024 / 2025 🌟".center(larguraTotal - 4) + "║")
+        print(f"{me}{'🌟 Equipe de Desenvolvimento 2024 / 2025 🌟'.center(larguraTotal - 4)}║")
         print("\t╠" + "═" * (larguraTotal - 2) + "╣")
-        print("\t║" + "Disciplina Aplicações Informaticas B".center(larguraTotal - 2) + "║")
-        print("\t║" + "Turma 12B".center(larguraTotal - 2) + "║")
-        print("\t║" + "Thierry 'Chefe Supremo' Trindade".center(larguraTotal - 2) + "║")
-        print("\t║" + "Santiago Santos".center(larguraTotal - 2) + "║")
-        print("\t║" + "Andre Madail".center(larguraTotal - 2) + "║")
+        print(f"{me}{'Disciplina Aplicações Informaticas B'.center(larguraTotal - 2)}║")
+        print(f"{me}{'Turma 12B'.center(larguraTotal - 2)}║")
+        print(f"{me}{'Thierry \'Chefe Supremo\' Trindade'.center(larguraTotal - 2)}║")
+        print(f"{me}{'Santiago Santos'.center(larguraTotal - 2)}║")
+        print(f"{me}{'Andre Madail'.center(larguraTotal - 2)}║")
         print("\t╠" + "═" * (larguraTotal - 2) + "╣")
-        print("\t║" + "🕵️  Testadores".center(larguraTotal - 1) + "║")
-        print("\t║" + "Professor com paciência infinita".center(larguraTotal - 2) + "║")
+        print(f"{me}{'🕵️  Testadores'.center(larguraTotal - 1)}║")
+        print(f"{me}{'Professor com paciência infinita'.center(larguraTotal - 2)}║")
         print("\t╠" + "═" * (larguraTotal - 2) + "╣")
-        print("\t║" + "🛠️  Engine & Ferramentas Utilizadas".center(larguraTotal - 1) + "║")
-        print("\t║" + "Desenvolvido em Python 🐍".center(larguraTotal - 3) + "║")
-        print("\t║" + "Google & CTRL+C / CTRL+V".center(larguraTotal - 2) + "║")
+        print(f"{me}{'🛠️  Engine & Ferramentas Utilizadas'.center(larguraTotal - 1)}║")
+        print(f"{me}{'Desenvolvido em Python 🐍'.center(larguraTotal - 3)}║")
+        print(f"{me}{'Google & CTRL+C / CTRL+V'.center(larguraTotal - 2)}║")
         print("\t╠" + "═" * (larguraTotal - 2) + "╣")
-        print("\t║" + "🙌  Agradecimentos Especiais".center(larguraTotal - 3) + "║")
-        print("\t║" + "Google, Wikipedia e tutoriais infinitos".center(larguraTotal - 2) + "║")
-        print("\t║" + "CTRL+Z, salvando vidas desde sempre".center(larguraTotal - 2) + "║")
-        print("\t║" + "Impulsionado por café e ansiedade! ☕😖".center(larguraTotal - 4) + "║")
+        print(f"{me}{'🙌  Agradecimentos Especiais'.center(larguraTotal - 3)}║")
+        print(f"{me}{'Google, Wikipedia e tutoriais infinitos'.center(larguraTotal - 2)}║")
+        print(f"{me}{'CTRL+Z, salvando vidas desde sempre'.center(larguraTotal - 2)}║")
+        print(f"{me}{'Impulsionado por café e ansiedade! ☕😖'.center(larguraTotal - 4)}║")
         print("\t╠" + "═" * (larguraTotal - 2) + "╣")
-        print("\t║" + "🎖️    Mensagem Final     ".center(larguraTotal - 1) + "║")
-        print("\t║" + "\"Obrigado por jogar e aguentar os bugs!\"".center(larguraTotal - 2) + "║")
-        print("\t║" + "Sair...".center(larguraTotal - 2) + "║")
+        print(f"{me}{'🎖️    Mensagem Final     '.center(larguraTotal - 1)}║")
+        print(f"{me}{'\"Obrigado por jogar e aguentar os bugs!\"'.center(larguraTotal - 2)}║")
+        print(f"{me}{'Sair...'.center(larguraTotal - 2)}║")
         print("\t╚" + "═" * (larguraTotal - 2) + "╝")
         # Fim dos créditos e mensagem final
         break
 
     else:
         # Caso a opção introduzida não seja válida
-        print("Opção inválida")
+        print(f"{il}Opção inválida")
